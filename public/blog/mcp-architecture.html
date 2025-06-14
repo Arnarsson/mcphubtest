@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MCP Architecture Deep Dive: How It Really Works</title>
+  <meta name="description" content="Explore the technical architecture of the Model Context Protocol (MCP), including its client-server model, data flow, and security considerations." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/styles/blog.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "MCP Architecture Deep Dive: How It Really Works",
+    "author": { "@type": "Organization", "name": "MCP Hub" },
+    "datePublished": "2025-06-14",
+    "description": "Detailed walkthrough of MCP's architecture, components, and security model.",
+    "keywords": ["mcp architecture", "model context protocol", "ai protocol design"]
+  }
+  </script>
+  <style>
+    body{font-family:system-ui;margin:0;line-height:1.6;padding:0 1rem;max-width:800px;margin:auto}
+    nav{margin-top:2rem}
+    nav a{color:#ff6c62;text-decoration:none;margin-right:8px}
+    progress{position:fixed;top:0;left:0;width:100%;height:4px;appearance:none;background:#eee}
+    progress::-webkit-progress-value{background:#ff6c62}
+  </style>
+</head>
+<body>
+  <progress id="readingProgress" value="0" max="100"></progress>
+  <nav><a href="/index.html#blog">← Back to Blog</a></nav>
+  <h1>MCP Architecture Deep Dive: How It Really Works</h1>
+  <p><em>12 min read&nbsp;•&nbsp;Published June 14 2025</em></p>
+  <hr/>
+
+  <nav id="toc"></nav>
+
+  <article id="content">
+    <section id="overview"><h2>Overview</h2>
+      <p>The <strong>Model Context Protocol</strong> (MCP) provides a language-agnostic contract that lets an LLM-powered client discover, request, and manipulate resources exposed by an MCP server.  While the surface area looks small—roughly a dozen JSON-RPC methods—the architecture behind it solves a surprisingly broad set of problems: capability scoping, streaming responses, multi-transport negotiation, and sandboxed execution.  This deep dive unpacks each layer so you can design systems that are both secure and future-proof.</p>
+    </section>
+
+    <section id="components"><h2>Core Components</h2>
+      <h3>Hosts</h3><p>A <em>host</em> is the environment in which a server or client runs—think containers, local processes, or remote VMs.  Hosts are responsible for sandboxing and can attach metadata such as CPU limits or network policies.</p>
+      <h3>Servers</h3><p>An MCP server exposes <em>resources</em> and <em>tools</em>.  A resource could be a file, database table, or live API endpoint.  Tools are executable operations (functions, scripts) that operate on resources.  Servers declare capabilities using a JSON schema so clients can reason about them <em>before</em> invoking anything.</p>
+      <h3>Clients</h3><p>The client is typically an AI assistant.  It connects to one or more servers via transports such as <code>stdio</code> (local CLI) or HTTP/SSE (remote).  Clients send JSON-RPC requests, receive responses, and may stream incremental patches.</p>
+      <h3>Transports</h3><p>MCP decouples the message format (always JSON-RPC) from the transport.  Today the reference implementation supports:</p>
+      <ul><li><strong>stdio</strong> – zero-config local integration</li><li><strong>HTTP/SSE</strong> – stateless request/stream responses</li><li><strong>WebSocket</strong> (draft) – bi-directional sessions for low-latency tools</li></ul>
+    </section>
+
+    <section id="data-flow"><h2>Request/Response Data Flow</h2>
+      <ol>
+        <li><strong>Capability Discovery</strong> – Client calls <code>server.getManifest</code>.</li>
+        <li><strong>Resource Listing</strong> – Client issues <code>resources.list</code>; server responds with URIs and metadata.</li>
+        <li><strong>Tool Invocation</strong> – Client sends <code>tools.exec</code> with specific parameters; server may stream <code>tool_patch</code> events.</li>
+        <li><strong>Completion</strong> – Server returns final JSON result or error.</li>
+      </ol>
+      <p>The spec guarantees idempotent retries for read-only methods, which unlocks automatic recovery for LLM hallucinations.  Write-operations must include <code>intentToken</code> headers to guard against replay attacks.</p>
+      <pre><code class="language-json">{
+  "jsonrpc": "2.0",
+  "id": "abc123",
+  "method": "tools.exec",
+  "params": {
+    "tool": "search_files",
+    "args": ["*.py"],
+    "intentToken": "sha256-..."
+  }
+}</code></pre>
+    </section>
+
+    <section id="security"><h2>Security Considerations</h2>
+      <p>MCP's design acknowledges that AI agents can be unpredictable.  Security is therefore baked into every layer:</p>
+      <ul>
+        <li><strong>Capability Scopes</strong> – Similar to OAuth scopes; clients request minimal access.</li>
+        <li><strong>Sandboxed Execution</strong> – Tools run in separate OS processes or WASM runtimes.</li>
+        <li><strong>Attestation</strong> – Future drafts include signed manifests for supply-chain integrity.</li>
+      </ul>
+      <p>Servers should treat untrusted prompts like remote code.  Practical measures include SELinux/AppArmor profiles, seccomp filters, and timeouts.</p>
+    </section>
+
+    <section id="reference-implementation"><h2>Reference Implementation Walkthrough</h2>
+      <p>The TypeScript SDK exposes high-level classes:</p>
+<pre><code class="language-ts">import { Server, ListResourcesRequest } from '@modelcontextprotocol/sdk/server';
+
+const server = new Server({ name: 'example', version: '0.1.0' });
+
+server.setRequestHandler(ListResourcesRequest, async () => ({
+  resources: [{ uri: 'file://README.md', name: 'README', mimeType: 'text/markdown' }]
+}));
+
+await server.connect();</code></pre>
+      <p>With fewer than 20 lines you have an MCP-compatible service.  The same code in Python via FastMCP is equally terse.</p>
+    </section>
+
+    <section id="faq"><h2>Frequently Asked Questions</h2>
+      <details><summary>How is MCP different from OpenAI Plug-ins?</summary><p>Plug-ins require HTTPS endpoints and model-specific JSON manifests.  MCP is transport-agnostic and model-agnostic.</p></details>
+      <details><summary>Can I self-host an MCP server?</summary><p>Yes.  Reference implementations have no external dependencies.</p></details>
+      <details><summary>Does MCP support streaming outputs?</summary><p>Yes via SSE or WebSocket transports.</p></details>
+      <details><summary>Is there a versioning strategy?</summary><p>The spec follows semantic versioning; <code>version</code> field in the manifest signals breaking changes.</p></details>
+    </section>
+  </article>
+
+  <script>
+    const prog=document.getElementById('readingProgress');
+    window.addEventListener('scroll',()=>{const total=document.body.scrollHeight-window.innerHeight;prog.value=(window.scrollY/total)*100;});
+  </script>
+
+  <script>
+    const tocEl=document.getElementById('toc');
+    const h2s=document.querySelectorAll('#content h2');
+    if(tocEl){const ul=document.createElement('ul');h2s.forEach(h=>{const li=document.createElement('li');const a=document.createElement('a');a.href='#'+h.id;a.textContent=h.textContent;li.appendChild(a);ul.appendChild(li);});tocEl.appendChild(ul);}    
+  </script>
+
+  <script type="application/ld+json">{
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"How is MCP different from OpenAI Plug-ins?","acceptedAnswer":{"@type":"Answer","text":"Plug-ins require HTTPS endpoints and model-specific JSON manifests. MCP is transport-agnostic and model-agnostic."}},
+      {"@type":"Question","name":"Can I self-host an MCP server?","acceptedAnswer":{"@type":"Answer","text":"Yes. Reference implementations have no external dependencies."}},
+      {"@type":"Question","name":"Does MCP support streaming outputs?","acceptedAnswer":{"@type":"Answer","text":"Yes via SSE or WebSocket transports."}},
+      {"@type":"Question","name":"Is there a versioning strategy?","acceptedAnswer":{"@type":"Answer","text":"The spec follows semantic versioning; version field in the manifest signals breaking changes."}}
+    ]
+  }</script>
+</body>
+</html> 

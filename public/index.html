@@ -722,6 +722,90 @@
             overflow-x: auto;
         }
         
+        /* Advanced Visual Effects & Micro-interactions */
+        .hero-content {
+            animation: heroFadeIn 1s ease-out;
+        }
+        
+        @keyframes heroFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Interactive Navigation Enhancement */
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::before {
+            width: 100%;
+        }
+        
+        /* Section Reveal Animation */
+        .section-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        
+        .section-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Enhanced Button Interactions */
+        .btn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn:active::after {
+            width: 300px;
+            height: 300px;
+        }
+        
+        /* Glow Effects */
+        .glow-on-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .glow-on-hover:hover {
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.6);
+            filter: brightness(1.1);
+        }
+        
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-menu {
@@ -4171,12 +4255,12 @@
         <div class="nav-container">
             <a href="#" class="logo" data-i18n="siteName">MCP Hub</a>
             <ul class="nav-menu" id="nav-menu">
-                <li class="nav-item"><a href="#home" data-i18n="nav.home">Hjem</a></li>
-                <li class="nav-item"><a href="#demo" data-i18n="nav.demo">Demo</a></li>
+                <li class="nav-item"><a href="#home" data-i18n="nav.home">Home</a></li>
                 <li class="nav-item"><a href="#blog" data-i18n="nav.blog">Blog</a></li>
-                <li class="nav-item"><a href="#playground" data-i18n="nav.playground">Playground</a></li>
                 <li class="nav-item"><a href="#tutorials" data-i18n="nav.tutorials">Tutorials</a></li>
-                <li class="nav-item"><a href="#pricing" data-i18n="nav.pricing">Priser</a></li>
+                <li class="nav-item"><a href="#services" data-i18n="nav.services">Services</a></li>
+                <li class="nav-item"><a href="#newsletter" data-i18n="nav.newsletter">Newsletter</a></li>
+                <li class="nav-item"><a href="#contact" data-i18n="nav.contact">Contact</a></li>
             </ul>
             <div class="nav-actions">
                 <div class="language-selector">
@@ -4217,11 +4301,29 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1 data-i18n="hero.title">Mester Model Context Protocol</h1>
-            <p data-i18n="hero.subtitle">Forbind din AI til enhver datakilde med kraft, sikkerhed og enkelhed. Lær MCP med interaktive demos og live kode.</p>
+            <h1 data-i18n="hero.title">Master Model Context Protocol</h1>
+            <p data-i18n="hero.subtitle">Your comprehensive resource for AI integration guides, expert tutorials, and cutting-edge insights. Learn MCP through detailed articles, step-by-step tutorials, and professional consultancy.</p>
             <div class="hero-buttons">
-                <a href="#demo" class="btn btn-primary" data-i18n="hero.startDemo">Start Demo</a>
-                <a href="#playground" class="btn btn-secondary" data-i18n="hero.tryPlayground">Prøv Playground</a>
+                <a href="#blog" class="btn btn-primary" data-i18n="hero.exploreBlog">Explore Blog</a>
+                <a href="#newsletter" class="btn btn-secondary" data-i18n="hero.getUpdates">Get AI Updates</a>
+            </div>
+            <div class="hero-features">
+                <div class="hero-feature">
+                    <span class="feature-icon">📚</span>
+                    <span class="feature-text" data-i18n="hero.feature1">Expert Tutorials</span>
+                </div>
+                <div class="hero-feature">
+                    <span class="feature-icon">🤖</span>
+                    <span class="feature-text" data-i18n="hero.feature2">AI Insights</span>
+                </div>
+                <div class="hero-feature">
+                    <span class="feature-icon">💼</span>
+                    <span class="feature-text" data-i18n="hero.feature3">Consultancy</span>
+                </div>
+                <div class="hero-feature">
+                    <span class="feature-icon">📧</span>
+                    <span class="feature-text" data-i18n="hero.feature4">Weekly Updates</span>
+                </div>
             </div>
         </div>
     </section>
@@ -4648,2496 +4750,11 @@ await server.connect(transport);</code></pre>
         </div>
     </footer>
 
-    <script>
-        // **SAFE STORAGE WRAPPER** - Fixes localStorage security errors
-        const storage = {
-            getItem: (key) => {
-                try {
-                    return localStorage.getItem(key);
-                } catch (e) {
-                    return null; // Fallback for sandboxed environment
-                }
-            },
-            setItem: (key, value) => {
-                try {
-                    localStorage.setItem(key, value);
-                } catch (e) {
-                    console.log('Storage not available in sandboxed environment');
-                }
-            }
-        };
+    <script src="js/blogRouting.js"></script>
+    <script src="js/guidedTour.js"></script>
+</body>
+</html>
 
-        // **MULTILINGUAL SYSTEM** - Using AI-Generated Translations
-        // Translations loaded from external file (translations.js)
-        // Fallback translations in case external file fails to load
-        const fallbackTranslations = {
-            da: { siteName: "MCP Hub", loading: "Indlæser..." },
-            en: { siteName: "MCP Hub", loading: "Loading..." },
-            de: { siteName: "MCP Hub", loading: "Laden..." },
-            es: { siteName: "MCP Hub", loading: "Cargando..." }
-        };
-
-        let currentLanguage = storage.getItem('language') || 'da';
-        let currentTheme = storage.getItem('theme') || 'light';
-
-        // **TRANSLATION SYSTEM**
-        function translatePage() {
-            const elements = document.querySelectorAll('[data-i18n]');
-            elements.forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                const translationData = window.translations || currentTranslations;
-                if (translationData[currentLanguage] && translationData[currentLanguage][key]) {
-                    element.textContent = translationData[currentLanguage][key];
-                }
-            });
-            
-            // Update document title and meta
-            const titles = {
-                da: 'MCP Hub - Mester Model Context Protocol | AI Integration Platform',
-                en: 'MCP Hub - Master Model Context Protocol | AI Integration Platform', 
-                de: 'MCP Hub - Model Context Protocol Meistern | AI Integration Platform',
-                es: 'MCP Hub - Domina Model Context Protocol | Plataforma de Integración IA'
-            };
-            document.title = titles[currentLanguage] || titles.da;
-            document.documentElement.lang = currentLanguage;
-        }
-
-        // **LANGUAGE SELECTOR**
-        function initLanguageSelector() {
-            const languageBtn = document.getElementById('language-btn');
-            const languageDropdown = document.getElementById('language-dropdown');
-            const languageOptions = document.querySelectorAll('.language-option');
-
-            languageBtn.addEventListener('click', () => {
-                languageDropdown.classList.toggle('active');
-            });
-
-            document.addEventListener('click', (e) => {
-                if (!languageBtn.contains(e.target) && !languageDropdown.contains(e.target)) {
-                    languageDropdown.classList.remove('active');
-                }
-            });
-
-            languageOptions.forEach(option => {
-                option.addEventListener('click', () => {
-                    const lang = option.getAttribute('data-lang');
-                    if (lang !== currentLanguage) {
-                        // Update active states
-                        languageOptions.forEach(opt => opt.classList.remove('active'));
-                        option.classList.add('active');
-                        
-                        // Update button
-                        const flagClass = `flag-${lang}`;
-                        const langName = option.textContent;
-                        languageBtn.querySelector('.flag-icon').className = `flag-icon ${flagClass}`;
-                        languageBtn.querySelector('span').textContent = langName;
-                        
-                        // Save and translate
-                        currentLanguage = lang;
-                        storage.setItem('language', lang);
-                        translatePage();
-                        
-                        // Close dropdown
-                        languageDropdown.classList.remove('active');
-                    }
-                });
-            });
-
-            // Set initial state
-            const activeOption = document.querySelector(`[data-lang="${currentLanguage}"]`);
-            if (activeOption) {
-                languageOptions.forEach(opt => opt.classList.remove('active'));
-                activeOption.classList.add('active');
-                const flagClass = `flag-${currentLanguage}`;
-                const langName = activeOption.textContent;
-                languageBtn.querySelector('.flag-icon').className = `flag-icon ${flagClass}`;
-                languageBtn.querySelector('span').textContent = langName;
-            }
-        }
-
-        // **THEME TOGGLE**
-        function initThemeToggle() {
-            const themeToggle = document.getElementById('theme-toggle');
-            const themeIcon = themeToggle.querySelector('.theme-icon');
-            
-            function updateTheme() {
-                document.documentElement.setAttribute('data-theme', currentTheme);
-                themeIcon.textContent = currentTheme === 'light' ? '🌙' : '☀️';
-                storage.setItem('theme', currentTheme);
-            }
-            
-            themeToggle.addEventListener('click', () => {
-                currentTheme = currentTheme === 'light' ? 'dark' : 'light';
-                updateTheme();
-            });
-            
-            updateTheme();
-        }
-
-        // **NAVBAR SCROLL EFFECT**
-        function initNavbar() {
-            const navbar = document.getElementById('navbar');
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const navMenu = document.getElementById('nav-menu');
-            
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-            });
-            
-            mobileMenuBtn.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-            });
-            
-            // Close mobile menu on link click
-            navMenu.addEventListener('click', (e) => {
-                if (e.target.tagName === 'A') {
-                    navMenu.classList.remove('active');
-                }
-            });
-        }
-
-        // **STATS COUNTER ANIMATION**
-        function initStatsCounter() {
-            const statItems = document.querySelectorAll('.stat-item');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate');
-                        const numberElement = entry.target.querySelector('.stat-number');
-                        const targetNumber = parseInt(numberElement.getAttribute('data-count'));
-                        animateNumber(numberElement, targetNumber);
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-            
-            statItems.forEach(item => observer.observe(item));
-        }
-
-        function animateNumber(element, target) {
-            let current = 0;
-            const increment = target / 50;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
-                element.textContent = Math.floor(current);
-            }, 30);
-        }
-
-        // **CODE EXAMPLES**
-        function initCodeExamples() {
-            const codeTabs = document.querySelectorAll('.code-tab');
-            const codeContent = document.getElementById('code-content');
-            const copyBtn = document.querySelector('.copy-btn');
-            
-            const codeExamples = {
-                typescript: `// TypeScript MCP Server
-import { Server } from '@modelcontextprotocol/sdk/server/index.js';
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-
-const server = new Server({
-  name: 'example-server',
-  version: '0.1.0',
-}, {
-  capabilities: {
-    resources: {},
-    tools: {},
-  },
-});
-
-// List available resources
-server.setRequestHandler(ListResourcesRequestSchema, async () => ({
-  resources: [
-    {
-      uri: 'file://example.txt',
-      name: 'Example file',
-      description: 'An example text file',
-      mimeType: 'text/plain',
-    },
-  ],
-}));
-
-// Start server
-const transport = new StdioServerTransport();
-await server.connect(transport);`,
-                python: `# Python MCP Server
-from mcp import Server, ListResourcesRequest
-from mcp.server.stdio import StdioServerTransport
-import asyncio
-
-# Create server instance
-server = Server("example-server")
-
-@server.list_resources()
-async def handle_list_resources() -> list[Resource]:
-    """List available resources."""
-    return [
-        Resource(
-            uri="file://example.txt",
-            name="Example file", 
-            description="An example text file",
-            mimeType="text/plain"
-        )
-    ]
-
-@server.read_resource()
-async def handle_read_resource(uri: str) -> str:
-    """Read resource content."""
-    if uri == "file://example.txt":
-        return "Hello from MCP!"
-    raise ValueError(f"Unknown resource: {uri}")
-
-# Start server
-async def main():
-    transport = StdioServerTransport()
-    await server.run(transport)
-
-if __name__ == "__main__":
-    asyncio.run(main())`,
-                javascript: `// JavaScript MCP Server
-const { Server } = require('@modelcontextprotocol/sdk/server');
-const { StdioServerTransport } = require('@modelcontextprotocol/sdk/server/stdio');
-
-// Create server
-const server = new Server({
-  name: 'example-server',
-  version: '0.1.0',
-}, {
-  capabilities: {
-    resources: {},
-    tools: {},
-  },
-});
-
-// Handle resource listing  
-server.setRequestHandler('resources/list', async () => {
-  return {
-    resources: [
-      {
-        uri: 'file://example.txt',
-        name: 'Example file',
-        description: 'An example text file',
-        mimeType: 'text/plain',
-      }
-    ]
-  };
-});
-
-// Handle resource reading
-server.setRequestHandler('resources/read', async (request) => {
-  if (request.params.uri === 'file://example.txt') {
-    return {
-      contents: [{
-        uri: request.params.uri,
-        mimeType: 'text/plain',
-        text: 'Hello from MCP!'
-      }]
-    };
-  }
-  throw new Error('Resource not found');
-});
-
-// Start server
-async function main() {
-  const transport = new StdioServerTransport();
-  await server.connect(transport);
-}
-
-main().catch(console.error);`,
-                go: `// Go MCP Server
-package main
-
-import (
-    "context"
-    "encoding/json"
-    "fmt"
-    "os"
-    
-    "github.com/modelcontextprotocol/go-sdk/mcp"
-)
-
-type ExampleServer struct {
-    *mcp.Server
-}
-
-func (s *ExampleServer) ListResources(ctx context.Context) (*mcp.ListResourcesResult, error) {
-    return &mcp.ListResourcesResult{
-        Resources: []mcp.Resource{
-            {
-                URI:         "file://example.txt",
-                Name:        "Example file",
-                Description: "An example text file", 
-                MimeType:    "text/plain",
-            },
-        },
-    }, nil
-}
-
-func (s *ExampleServer) ReadResource(ctx context.Context, uri string) (*mcp.ReadResourceResult, error) {
-    if uri == "file://example.txt" {
-        return &mcp.ReadResourceResult{
-            Contents: []mcp.ResourceContents{
-                {
-                    URI:      uri,
-                    MimeType: "text/plain",
-                    Text:     "Hello from MCP!",
-                },
-            },
-        }, nil
-    }
-    return nil, fmt.Errorf("resource not found: %s", uri)
-}
-
-func main() {
-    server := &ExampleServer{
-        Server: mcp.NewServer("example-server", "0.1.0"),
-    }
-    
-    transport := mcp.NewStdioTransport()
-    if err := server.Serve(context.Background(), transport); err != nil {
-        fmt.Fprintf(os.Stderr, "Server error: %v\\n", err)
-        os.Exit(1)
-    }
-}`
-            };
-            
-            codeTabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    // Update active tab
-                    codeTabs.forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                    
-                    // Update code content
-                    const lang = tab.getAttribute('data-lang');
-                    if (codeExamples[lang]) {
-                        codeContent.innerHTML = `<pre><code>${codeExamples[lang]}</code></pre>`;
-                    }
-                });
-            });
-            
-            // Copy functionality
-            copyBtn.addEventListener('click', async () => {
-                try {
-                    const code = codeContent.textContent;
-                    await navigator.clipboard.writeText(code);
-                    copyBtn.textContent = 'Kopieret!';
-                    copyBtn.classList.add('copied');
-                    setTimeout(() => {
-                        copyBtn.textContent = 'Kopier';
-                        copyBtn.classList.remove('copied');
-                    }, 2000);
-                } catch (err) {
-                    console.log('Copy failed:', err);
-                }
-            });
-        }
-
-        // **LIVE CODE PLAYGROUND**
-        function initPlayground() {
-            const runBtn = document.getElementById('run-code');
-            const resetBtn = document.getElementById('reset-code');
-            const codeEditor = document.getElementById('code-editor');
-            const codeOutput = document.getElementById('code-output');
-            
-            const defaultCode = `// MCP Server Example
-const server = {
-  name: 'demo-server',
-  version: '1.0.0',
-  resources: [
-    {
-      uri: 'file://demo.txt',
-      name: 'Demo File',
-      content: 'Hello MCP World!'
-    }
-  ]
-};
-
-// Simulate MCP operation
-function listResources() {
-  return server.resources.map(r => ({
-    uri: r.uri,
-    name: r.name
-  }));
-}
-
-function readResource(uri) {
-  const resource = server.resources.find(r => r.uri === uri);
-  return resource ? resource.content : 'Resource not found';
-}
-
-console.log('Available resources:', listResources());
-console.log('Reading demo.txt:', readResource('file://demo.txt'));`;
-            
-            codeEditor.value = defaultCode;
-            
-            runBtn.addEventListener('click', () => {
-                try {
-                    const code = codeEditor.value;
-                    
-                    // Capture console.log
-                    const logs = [];
-                    const originalLog = console.log;
-                    console.log = (...args) => {
-                        logs.push(args.join(' '));
-                        originalLog(...args);
-                    };
-                    
-                    // Execute code
-                    eval(code);
-                    
-                    // Restore console.log
-                    console.log = originalLog;
-                    
-                    // Display output
-                    codeOutput.innerHTML = logs.map(log => `<div style="margin-bottom: 8px;">${log}</div>`).join('');
-                    
-                } catch (error) {
-                    codeOutput.innerHTML = `<div style="color: #ef4444;">Error: ${error.message}</div>`;
-                }
-            });
-            
-            resetBtn.addEventListener('click', () => {
-                codeEditor.value = defaultCode;
-                codeOutput.innerHTML = '';
-            });
-        }
-
-        // **TESTIMONIALS CAROUSEL**
-        function initTestimonials() {
-            const testimonialItems = document.querySelectorAll('.testimonial-item');
-            const carouselDots = document.querySelectorAll('.carousel-dot');
-            let currentSlide = 0;
-            
-            function showSlide(index) {
-                testimonialItems.forEach(item => item.classList.remove('active'));
-                carouselDots.forEach(dot => dot.classList.remove('active'));
-                
-                testimonialItems[index].classList.add('active');
-                carouselDots[index].classList.add('active');
-                currentSlide = index;
-            }
-            
-            carouselDots.forEach((dot, index) => {
-                dot.addEventListener('click', () => showSlide(index));
-            });
-            
-            // Auto-rotate every 5 seconds
-            setInterval(() => {
-                currentSlide = (currentSlide + 1) % testimonialItems.length;
-                showSlide(currentSlide);
-            }, 5000);
-        }
-
-        // **PRICING CALCULATOR**
-        function initPricingCalculator() {
-            const requestsInput = document.getElementById('requests');
-            const serversInput = document.getElementById('servers');
-            const supportSelect = document.getElementById('support');
-            const totalPriceElement = document.getElementById('total-price');
-            
-            function calculatePrice() {
-                const requests = parseInt(requestsInput.value) || 0;
-                const servers = parseInt(serversInput.value) || 0;
-                const support = supportSelect.value;
-                
-                // Base pricing logic
-                let basePrice = (requests / 1000) * 0.01; // $0.01 per 1000 requests
-                basePrice += servers * 49; // $49 per server
-                
-                // Support multipliers
-                const supportMultipliers = {
-                    basic: 1,
-                    premium: 1.5,
-                    enterprise: 2.5
-                };
-                
-                const totalPrice = basePrice * (supportMultipliers[support] || 1);
-                totalPriceElement.textContent = `$${Math.ceil(totalPrice)}`;
-            }
-            
-            [requestsInput, serversInput, supportSelect].forEach(input => {
-                input.addEventListener('input', calculatePrice);
-                input.addEventListener('change', calculatePrice);
-            });
-            
-            // Initial calculation
-            calculatePrice();
-        }
-
-        // **DEMO INTERACTIONS**
-        function initDemoInteractions() {
-            const demoCards = document.querySelectorAll('.demo-card');
-            
-            demoCards.forEach(card => {
-                card.addEventListener('click', () => {
-                    const demoType = card.getAttribute('data-demo');
-                    openDemoModal(demoType);
-                });
-            });
-            
-            const tutorialThumbnails = document.querySelectorAll('.tutorial-thumbnail');
-            tutorialThumbnails.forEach(thumbnail => {
-                thumbnail.addEventListener('click', () => {
-                    const videoType = thumbnail.getAttribute('data-video');
-                    alert(`Video: ${videoType} - Tutorial kommer snart!`);
-                });
-            });
-        }
-
-        // **DEMO MODAL FUNCTIONS**
-        let currentDemoMode = 'story'; // 'story' or 'technical'
-        let currentDemoType = null;
-
-        function openDemoModal(demoType) {
-            const modal = document.getElementById('demoModal');
-            const title = document.getElementById('demoModalTitle');
-            const body = document.getElementById('demoModalBody');
-            
-            currentDemoType = demoType;
-            currentDemoMode = 'story'; // Always start in story mode
-            
-            // Set title based on demo type and mode
-            updateDemoTitle();
-            
-            // Generate demo content with mode selector
-            generateDemoContent(demoType, currentDemoMode);
-            
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function updateDemoTitle() {
-            const title = document.getElementById('demoModalTitle');
-            
-            const storyTitles = {
-                'filesystem': currentLanguage === 'da' ? 'AI Der Faktisk Håndterer Dine Filer' : 
-                             currentLanguage === 'de' ? 'KI, Die Tatsächlich Ihre Dateien Verwaltet' :
-                             currentLanguage === 'es' ? 'IA Que Realmente Gestiona Tus Archivos' :
-                             'AI That Actually Manages Your Files',
-                'database': currentLanguage === 'da' ? 'AI Der Finder Svar I Dine Data' :
-                           currentLanguage === 'de' ? 'KI, Die Antworten in Ihren Daten Findet' :
-                           currentLanguage === 'es' ? 'IA Que Encuentra Respuestas en Tus Datos' :
-                           'AI That Finds Answers in Your Data',
-                'api': currentLanguage === 'da' ? 'AI Der Forbinder Til Enhver Tjeneste' :
-                       currentLanguage === 'de' ? 'KI, Die Sich Mit Jedem Service Verbindet' :
-                       currentLanguage === 'es' ? 'IA Que Se Conecta a Cualquier Servicio' :
-                       'AI That Connects to Any Service',
-                'realtime': currentLanguage === 'da' ? 'AI Der Holder Sig Opdateret Med Live Data' :
-                           currentLanguage === 'de' ? 'KI, Die Mit Live-Daten Aktuell Bleibt' :
-                           currentLanguage === 'es' ? 'IA Que Se Mantiene Actualizada con Datos en Vivo' :
-                           'AI That Stays Updated With Live Data'
-            };
-
-            const technicalTitles = {
-                'filesystem': currentLanguage === 'da' ? 'Filsystem Integration Demo' : 
-                             currentLanguage === 'de' ? 'Dateisystem Integration Demo' :
-                             currentLanguage === 'es' ? 'Demo de Integración del Sistema de Archivos' :
-                             'Filesystem Integration Demo',
-                'database': currentLanguage === 'da' ? 'Database Forbindelse Demo' :
-                           currentLanguage === 'de' ? 'Datenbankverbindung Demo' :
-                           currentLanguage === 'es' ? 'Demo de Conexión de Base de Datos' :
-                           'Database Connection Demo',
-                'api': currentLanguage === 'da' ? 'API Integration Demo' :
-                       currentLanguage === 'de' ? 'API Integration Demo' :
-                       currentLanguage === 'es' ? 'Demo de Integración API' :
-                       'API Integration Demo',
-                'realtime': currentLanguage === 'da' ? 'Realtids Data Demo' :
-                           currentLanguage === 'de' ? 'Echtzeit-Daten Demo' :
-                           currentLanguage === 'es' ? 'Demo de Datos en Tiempo Real' :
-                           'Real-time Data Demo'
-            };
-
-            const titles = currentDemoMode === 'story' ? storyTitles : technicalTitles;
-            title.textContent = titles[currentDemoType] || 'Demo';
-        }
-
-        function generateDemoContent(demoType, mode) {
-            const body = document.getElementById('demoModalBody');
-            
-            // Create mode selector header
-            const modeSelector = `
-                <div class="demo-mode-selector">
-                    <div class="mode-tabs">
-                        <button class="mode-tab ${mode === 'story' ? 'active' : ''}" onclick="switchDemoMode('story')">
-                            📖 ${currentLanguage === 'da' ? 'Historie' : currentLanguage === 'de' ? 'Geschichte' : currentLanguage === 'es' ? 'Historia' : 'Story'}
-                        </button>
-                        <button class="mode-tab ${mode === 'technical' ? 'active' : ''}" onclick="switchDemoMode('technical')">
-                            🔧 ${currentLanguage === 'da' ? 'Teknisk' : currentLanguage === 'de' ? 'Technisch' : currentLanguage === 'es' ? 'Técnico' : 'Technical'}
-                        </button>
-                    </div>
-                </div>
-                <div class="demo-content-area" id="demoContentArea">
-                    ${getDemoModeContent(demoType, mode)}
-                </div>
-            `;
-            
-            body.innerHTML = modeSelector;
-            
-            // Initialize the appropriate demo functionality
-            if (mode === 'technical') {
-                initTechnicalDemo(demoType);
-            } else {
-                initStoryDemo(demoType);
-            }
-        }
-
-        function switchDemoMode(newMode) {
-            currentDemoMode = newMode;
-            updateDemoTitle();
-            
-            // Update tab appearance
-            document.querySelectorAll('.mode-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelector(`.mode-tab[onclick*="${newMode}"]`).classList.add('active');
-            
-            // Update content
-            const contentArea = document.getElementById('demoContentArea');
-            contentArea.innerHTML = getDemoModeContent(currentDemoType, newMode);
-            
-            // Re-initialize functionality
-            if (newMode === 'technical') {
-                initTechnicalDemo(currentDemoType);
-            } else {
-                initStoryDemo(currentDemoType);
-            }
-        }
-
-        function getDemoModeContent(demoType, mode) {
-            if (mode === 'story') {
-                return getStoryModeContent(demoType);
-            } else {
-                return getTechnicalModeContent(demoType);
-            }
-        }
-
-        function getStoryModeContent(demoType) {
-            const storyContent = {
-                'filesystem': `
-                    <div class="story-demo">
-                        <div class="problem-solution">
-                            <div class="problem">
-                                <h3>🚫 ${currentLanguage === 'da' ? 'Problemet' : currentLanguage === 'de' ? 'Das Problem' : currentLanguage === 'es' ? 'El Problema' : 'The Problem'}</h3>
-                                <p>"${currentLanguage === 'da' ? 'Mit skrivebord er rodet. Jeg spilder tid på at lede efter den rigtige fil.' : 
-                                      currentLanguage === 'de' ? 'Mein Desktop ist unordentlich. Ich verschwende Zeit damit, nach der richtigen Datei zu suchen.' :
-                                      currentLanguage === 'es' ? 'Mi escritorio está desordenado. Pierdo tiempo buscando el archivo correcto.' :
-                                      'My desktop is a mess. I waste time digging for the right file.'}"</p>
-                                <p><small>${currentLanguage === 'da' ? 'Traditionelle AI chatbots kan fortælle dig hvordan du organiserer filer, men kan ikke gøre det.' : 
-                                           currentLanguage === 'de' ? 'Traditionelle KI-Chatbots können Ihnen sagen, wie Sie Dateien organisieren, aber können es nicht tun.' :
-                                           currentLanguage === 'es' ? 'Los chatbots de IA tradicionales pueden decirte cómo organizar archivos, pero no pueden hacerlo.' :
-                                           'Traditional AI chatbots can tell you how to organize files but can\'t do it.'}</small></p>
-                            </div>
-                            <div class="solution">
-                                <h3>✅ ${currentLanguage === 'da' ? 'MCP Løsningen' : currentLanguage === 'de' ? 'Die MCP-Lösung' : currentLanguage === 'es' ? 'La Solución MCP' : 'The MCP Solution'}</h3>
-                                <p>${currentLanguage === 'da' ? 'MCP lader en assistent forbinde til dit filsystem og handle på dine vegne.' : 
-                                     currentLanguage === 'de' ? 'MCP lässt einen Assistenten sich mit Ihrem Dateisystem verbinden und in Ihrem Namen handeln.' :
-                                     currentLanguage === 'es' ? 'MCP permite que un asistente se conecte a tu sistema de archivos y actúe en tu nombre.' :
-                                     'MCP lets an assistant connect to your file system and act on your behalf.'}</p>
-                            </div>
-                        </div>
-                        <div class="interactive-story">
-                            <div class="story-step" id="story-step-1">
-                                <h4>📂 ${currentLanguage === 'da' ? 'Release Forberedelse Scenarie' : currentLanguage === 'de' ? 'Release-Vorbereitungs-Szenario' : currentLanguage === 'es' ? 'Escenario de Preparación de Release' : 'Release Preparation Scenario'}</h4>
-                                <p>${currentLanguage === 'da' ? 'Du forbereder en release. Spørg din AI assistent om at:' : 
-                                     currentLanguage === 'de' ? 'Sie bereiten eine Veröffentlichung vor. Bitten Sie Ihren KI-Assistenten:' :
-                                     currentLanguage === 'es' ? 'Estás preparando un lanzamiento. Pide a tu asistente de IA que:' :
-                                     'You\'re prepping a release. Ask your AI assistant to:'}</p>
-                                <ul class="scenario-steps">
-                                    <li>${currentLanguage === 'da' ? 'Ryd op i gamle log filer' : currentLanguage === 'de' ? 'Alte Log-Dateien aufräumen' : currentLanguage === 'es' ? 'Limpiar archivos de log antiguos' : 'Clean up old log files'}</li>
-                                    <li>${currentLanguage === 'da' ? 'Opret en frisk release/ mappe' : currentLanguage === 'de' ? 'Erstelle einen neuen release/ Ordner' : currentLanguage === 'es' ? 'Crear una carpeta release/ nueva' : 'Create a fresh release/ folder'}</li>
-                                    <li>${currentLanguage === 'da' ? 'Flyt de seneste build artefakter' : currentLanguage === 'de' ? 'Neueste Build-Artefakte verschieben' : currentLanguage === 'es' ? 'Mover los últimos artefactos de build' : 'Move the latest build artifacts'}</li>
-                                    <li>${currentLanguage === 'da' ? 'Zip alt til deling' : currentLanguage === 'de' ? 'Alles für das Teilen zippen' : currentLanguage === 'es' ? 'Comprimir todo para compartir' : 'Zip everything for sharing'}</li>
-                                </ul>
-                                <div class="demo-chat">
-                                    <div class="user-message">"${currentLanguage === 'da' ? 'Organiser min release' : 
-                                                                   currentLanguage === 'de' ? 'Organisiere meine Veröffentlichung' :
-                                                                   currentLanguage === 'es' ? 'Organiza mi lanzamiento' :
-                                                                   'Organize my release'}"</div>
-                                    <button class="story-action-btn" onclick="runFilesystemStory()">${currentLanguage === 'da' ? '▶️ Se AI Arbejde' : currentLanguage === 'de' ? '▶️ KI Bei Der Arbeit Zusehen' : currentLanguage === 'es' ? '▶️ Ver IA Trabajar' : '▶️ Watch AI Work'}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `,
-                'database': `
-                    <div class="story-demo">
-                        <div class="problem-solution">
-                            <div class="problem">
-                                <h3>🚫 ${currentLanguage === 'da' ? 'Problemet' : currentLanguage === 'de' ? 'Das Problem' : currentLanguage === 'es' ? 'El Problema' : 'The Problem'}</h3>
-                                <p>"${currentLanguage === 'da' ? 'Jeg har data i en database, men ingen tid til at skrive SQL.' : 
-                                      currentLanguage === 'de' ? 'Ich habe Daten in einer Datenbank, aber keine Zeit, SQL zu schreiben.' :
-                                      currentLanguage === 'es' ? 'Tengo datos en una base de datos pero no tengo tiempo para escribir SQL.' :
-                                      'I have data in a database but no time to write SQL.'}"</p>
-                            </div>
-                            <div class="solution">
-                                <h3>✅ ${currentLanguage === 'da' ? 'MCP Løsningen' : currentLanguage === 'de' ? 'Die MCP-Lösung' : currentLanguage === 'es' ? 'La Solución MCP' : 'The MCP Solution'}</h3>
-                                <p>${currentLanguage === 'da' ? 'Spørg bare: "Hvem er mine top kunder?" og få øjeblikkelige svar.' : 
-                                     currentLanguage === 'de' ? 'Fragen Sie einfach: "Wer sind meine Top-Kunden?" und erhalten Sie sofortige Antworten.' :
-                                     currentLanguage === 'es' ? 'Solo pregunta: "¿Quiénes son mis mejores clientes?" y obtén respuestas instantáneas.' :
-                                     'Just ask: "Who are my top customers?" and get instant answers.'}</p>
-                            </div>
-                        </div>
-                        <div class="interactive-story">
-                            <div class="story-step">
-                                <h4>📊 ${currentLanguage === 'da' ? 'Marketing Leder Scenarie' : currentLanguage === 'de' ? 'Marketing-Leiter-Szenario' : currentLanguage === 'es' ? 'Escenario de Líder de Marketing' : 'Marketing Lead Scenario'}</h4>
-                                <p>${currentLanguage === 'da' ? 'Marketing lederen spørger:' : 
-                                     currentLanguage === 'de' ? 'Der Marketing-Leiter fragt:' :
-                                     currentLanguage === 'es' ? 'El líder de marketing pregunta:' :
-                                     'Marketing lead asks:'}</p>
-                                <div class="demo-chat">
-                                    <div class="user-message">"${currentLanguage === 'da' ? 'Hvem er vores top 10 kunder efter levetidsværdi sidste kvartal?' : 
-                                                                   currentLanguage === 'de' ? 'Wer sind unsere Top 10 Kunden nach Lebenszeitwert im letzten Quartal?' :
-                                                                   currentLanguage === 'es' ? '¿Quiénes son nuestros 10 mejores clientes por valor de por vida el último trimestre?' :
-                                                                   'Who are our top 10 customers by lifetime value last quarter?'}"</div>
-                                    <button class="story-action-btn" onclick="runTopCustomersStory()">${currentLanguage === 'da' ? '📈 Find Top Kunder' : currentLanguage === 'de' ? '📈 Top-Kunden Finden' : currentLanguage === 'es' ? '📈 Encontrar Mejores Clientes' : '📈 Find Top Customers'}</button>
-                                </div>
-                                <div class="quick-questions">
-                                    <h5>${currentLanguage === 'da' ? 'Andre spørgsmål du kan stille:' : currentLanguage === 'de' ? 'Andere Fragen, die Sie stellen können:' : currentLanguage === 'es' ? 'Otras preguntas que puedes hacer:' : 'Other questions you can ask:'}</h5>
-                                    <div class="question-chips">
-                                        <button class="question-chip" onclick="runDatabaseQuestion('revenue')">${currentLanguage === 'da' ? 'Månedlig omsætning?' : currentLanguage === 'de' ? 'Monatlicher Umsatz?' : currentLanguage === 'es' ? '¿Ingresos mensuales?' : 'Monthly revenue?'}</button>
-                                        <button class="question-chip" onclick="runDatabaseQuestion('popular')">${currentLanguage === 'da' ? 'Populære produkter?' : currentLanguage === 'de' ? 'Beliebte Produkte?' : currentLanguage === 'es' ? '¿Productos populares?' : 'Popular products?'}</button>
-                                        <button class="question-chip" onclick="runDatabaseQuestion('growth')">${currentLanguage === 'da' ? 'Kundevækst?' : currentLanguage === 'de' ? 'Kundenwachstum?' : currentLanguage === 'es' ? '¿Crecimiento de clientes?' : 'Customer growth?'}</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `,
-                'api': `
-                    <div class="story-demo">
-                        <div class="problem-solution">
-                            <div class="problem">
-                                <h3>🚫 ${currentLanguage === 'da' ? 'Problemet' : currentLanguage === 'de' ? 'Das Problem' : currentLanguage === 'es' ? 'El Problema' : 'The Problem'}</h3>
-                                <p>"${currentLanguage === 'da' ? 'Jeg jonglerer med dusinvis af SaaS APIs - autentificering og dokumentation er en smerte.' : 
-                                      currentLanguage === 'de' ? 'Ich jongliere mit Dutzenden von SaaS-APIs - Authentifizierung und Dokumentation sind schmerzhaft.' :
-                                      currentLanguage === 'es' ? 'Hago malabarismos con docenas de APIs de SaaS: la autenticación y la documentación son un dolor.' :
-                                      'I juggle dozens of SaaS APIs – authentication and docs are a pain.'}"</p>
-                            </div>
-                            <div class="solution">
-                                <h3>✅ ${currentLanguage === 'da' ? 'MCP Løsningen' : currentLanguage === 'de' ? 'Die MCP-Lösung' : currentLanguage === 'es' ? 'La Solución MCP' : 'The MCP Solution'}</h3>
-                                <p>${currentLanguage === 'da' ? 'Én AI assistent, forbundet til alt hvad du bruger.' : 
-                                     currentLanguage === 'de' ? 'Ein KI-Assistent, verbunden mit allem, was Sie verwenden.' :
-                                     currentLanguage === 'es' ? 'Un asistente de IA, conectado a todo lo que usas.' :
-                                     'One AI assistant, connected to everything you use.'}</p>
-                            </div>
-                        </div>
-                        <div class="interactive-story">
-                            <div class="story-step">
-                                <h4>🤝 ${currentLanguage === 'da' ? 'Team Stand-up Automatisering' : currentLanguage === 'de' ? 'Team Stand-up Automatisierung' : currentLanguage === 'es' ? 'Automatización de Stand-up del Equipo' : 'Team Stand-up Automation'}</h4>
-                                <p>${currentLanguage === 'da' ? 'Automatiser dit teamarbejde: opret et GitHub issue, send derefter linket til Slack.' : 
-                                     currentLanguage === 'de' ? 'Automatisieren Sie Ihre Teamarbeit: Erstellen Sie ein GitHub-Issue und senden Sie dann den Link an Slack.' :
-                                     currentLanguage === 'es' ? 'Automatiza el trabajo de tu equipo: crea un issue de GitHub, luego envía el enlace a Slack.' :
-                                     'Automate your team workflow: create a GitHub issue, then post the link to Slack.'}</p>
-                                <div class="api-workflow">
-                                    <div class="workflow-step">
-                                        <div class="service-icon">🐙</div>
-                                        <span>GitHub API</span>
-                                        <div class="arrow">→</div>
-                                    </div>
-                                    <div class="workflow-step">
-                                        <div class="service-icon">💬</div>
-                                        <span>Slack API</span>
-                                    </div>
-                                </div>
-                                <div class="demo-chat">
-                                    <div class="user-message">"${currentLanguage === 'da' ? 'Opret et daily stand-up issue og fortæl teamet' : 
-                                                                   currentLanguage === 'de' ? 'Erstelle ein tägliches Stand-up-Issue und informiere das Team' :
-                                                                   currentLanguage === 'es' ? 'Crea un issue de stand-up diario y avisa al equipo' :
-                                                                   'Create a daily stand-up issue and notify the team'}"</div>
-                                    <button class="story-action-btn" onclick="runApiWorkflow()">${currentLanguage === 'da' ? '🚀 Kør Workflow' : currentLanguage === 'de' ? '🚀 Workflow Ausführen' : currentLanguage === 'es' ? '🚀 Ejecutar Workflow' : '🚀 Run Workflow'}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `,
-                'realtime': `
-                    <div class="story-demo">
-                        <div class="problem-solution">
-                            <div class="problem">
-                                <h3>🚫 ${currentLanguage === 'da' ? 'Problemet' : currentLanguage === 'de' ? 'Das Problem' : currentLanguage === 'es' ? 'El Problema' : 'The Problem'}</h3>
-                                <p>"${currentLanguage === 'da' ? 'Dashboards halter; jeg har brug for live svar.' : 
-                                      currentLanguage === 'de' ? 'Dashboards hinken hinterher; ich brauche Live-Antworten.' :
-                                      currentLanguage === 'es' ? 'Los dashboards van retrasados; necesito respuestas en vivo.' :
-                                      'Dashboards lag; I need live answers.'}"</p>
-                            </div>
-                            <div class="solution">
-                                <h3>✅ ${currentLanguage === 'da' ? 'MCP Løsningen' : currentLanguage === 'de' ? 'Die MCP-Lösung' : currentLanguage === 'es' ? 'La Solución MCP' : 'The MCP Solution'}</h3>
-                                <p>${currentLanguage === 'da' ? 'AI der ved hvad der sker LIGE NU, ikke sidste år.' : 
-                                     currentLanguage === 'de' ? 'KI, die weiß, was JETZT passiert, nicht letztes Jahr.' :
-                                     currentLanguage === 'es' ? 'IA que sabe lo que está pasando AHORA, no el año pasado.' :
-                                     'AI that knows what\'s happening NOW, not last year.'}</p>
-                            </div>
-                        </div>
-                        <div class="interactive-story">
-                            <div class="story-step">
-                                <h4>📈 ${currentLanguage === 'da' ? 'Investor Portfolio Overvågning' : currentLanguage === 'de' ? 'Investor Portfolio Überwachung' : currentLanguage === 'es' ? 'Monitoreo de Portfolio de Inversor' : 'Investor Portfolio Monitoring'}</h4>
-                                <p>${currentLanguage === 'da' ? 'Overvåg AAPL aktiekurs og CPU forbrug af trading bot server på ét sted.' : 
-                                     currentLanguage === 'de' ? 'Überwachen Sie AAPL-Aktienpreis und CPU-Verbrauch des Trading-Bot-Servers an einem Ort.' :
-                                     currentLanguage === 'es' ? 'Monitorea el precio de las acciones de AAPL y el uso de CPU del servidor de trading bot en un lugar.' :
-                                     'Monitor AAPL stock price and CPU usage of trading bot server in one place.'}</p>
-                                <div class="live-streams">
-                                    <div class="stream-item">
-                                        <span class="stream-icon">📈</span>
-                                        <span>${currentLanguage === 'da' ? 'Live Aktier' : currentLanguage === 'de' ? 'Live Aktien' : currentLanguage === 'es' ? 'Acciones en Vivo' : 'Live Stocks'}</span>
-                                        <div class="stream-status active"></div>
-                                    </div>
-                                    <div class="stream-item">
-                                        <span class="stream-icon">💻</span>
-                                        <span>${currentLanguage === 'da' ? 'System Metrics' : currentLanguage === 'de' ? 'System-Metriken' : currentLanguage === 'es' ? 'Métricas del Sistema' : 'System Metrics'}</span>
-                                        <div class="stream-status active"></div>
-                                    </div>
-                                </div>
-                                <div class="demo-chat">
-                                    <div class="user-message">"${currentLanguage === 'da' ? 'Hvordan har min portefølje det i dag?' : 
-                                                                   currentLanguage === 'de' ? 'Wie läuft mein Portfolio heute?' :
-                                                                   currentLanguage === 'es' ? '¿Cómo va mi cartera hoy?' :
-                                                                   'How\'s my portfolio doing today?'}"</div>
-                                    <button class="story-action-btn" onclick="runLivePortfolioStory()">${currentLanguage === 'da' ? '📊 Live Portfolio' : currentLanguage === 'de' ? '📊 Live Portfolio' : currentLanguage === 'es' ? '📊 Portfolio en Vivo' : '📊 Live Portfolio'}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `
-            };
-            
-            return storyContent[demoType] || '<div>Story content coming soon...</div>';
-        }
-
-        function getTechnicalModeContent(demoType) {
-            // Return the existing technical demo content
-            if (demoType === 'filesystem') {
-                return generateFilesystemDemo();
-            } else if (demoType === 'database') {
-                return generateDatabaseDemo();
-            } else if (demoType === 'api') {
-                return generateApiDemo();
-            } else if (demoType === 'realtime') {
-                return generateRealtimeDemo();
-            }
-            return '<div>Technical content not found</div>';
-        }
-
-        function initStoryDemo(demoType) {
-            // Initialize story mode interactions
-            console.log(`Initializing story mode for ${demoType}`);
-        }
-
-        function initTechnicalDemo(demoType) {
-            // Initialize technical demo functionality
-            if (demoType === 'filesystem') {
-                initFilesystemDemo();
-            } else if (demoType === 'database') {
-                initDatabaseDemo();
-            } else if (demoType === 'api') {
-                initApiDemo();
-            } else if (demoType === 'realtime') {
-                initRealtimeDemo();
-            }
-        }
-
-        // Story Mode Interaction Functions
-        function startFileOrganization() {
-            const button = document.querySelector('.story-action-btn');
-            const originalText = button.innerHTML;
-            
-            // Show loading state
-            button.innerHTML = '⏳ ' + (currentLanguage === 'da' ? 'AI Arbejder...' : 
-                                       currentLanguage === 'de' ? 'KI Arbeitet...' :
-                                       currentLanguage === 'es' ? 'IA Trabajando...' :
-                                       'AI Working...');
-            button.disabled = true;
-            
-            // Simulate AI organizing files
-            setTimeout(() => {
-                const chatArea = document.querySelector('.demo-chat');
-                const aiResponse = document.createElement('div');
-                aiResponse.className = 'ai-message';
-                aiResponse.innerHTML = `
-                    <div class="ai-response">
-                        🤖 <strong>AI:</strong> ${currentLanguage === 'da' ? 'Jeg har scannet dit skrivebord og fundet:' :
-                                                   currentLanguage === 'de' ? 'Ich habe Ihren Desktop gescannt und gefunden:' :
-                                                   currentLanguage === 'es' ? 'He escaneado tu escritorio y encontré:' :
-                                                   'I\'ve scanned your desktop and found:'}
-                        <ul style="margin: 10px 0; padding-left: 20px;">
-                            <li>📸 23 ${currentLanguage === 'da' ? 'billeder' : currentLanguage === 'de' ? 'Bilder' : currentLanguage === 'es' ? 'imágenes' : 'photos'}</li>
-                            <li>📄 12 ${currentLanguage === 'da' ? 'dokumenter' : currentLanguage === 'de' ? 'Dokumente' : currentLanguage === 'es' ? 'documentos' : 'documents'}</li>
-                            <li>🎥 5 ${currentLanguage === 'da' ? 'videoer' : currentLanguage === 'de' ? 'Videos' : currentLanguage === 'es' ? 'videos' : 'videos'}</li>
-                        </ul>
-                        ${currentLanguage === 'da' ? 'Organiserer nu filer efter type...' :
-                          currentLanguage === 'de' ? 'Organisiere jetzt Dateien nach Typ...' :
-                          currentLanguage === 'es' ? 'Organizando archivos por tipo ahora...' :
-                          'Now organizing files by type...'}
-                    </div>
-                `;
-                chatArea.appendChild(aiResponse);
-                
-                // Show technical insight button
-                setTimeout(() => {
-                    const insightBtn = document.createElement('button');
-                    insightBtn.className = 'story-action-btn';
-                    insightBtn.style.marginTop = '16px';
-                    insightBtn.innerHTML = '🔧 ' + (currentLanguage === 'da' ? 'Se Hvordan Det Virker' :
-                                                    currentLanguage === 'de' ? 'Sehen Wie Es Funktioniert' :
-                                                    currentLanguage === 'es' ? 'Ver Cómo Funciona' :
-                                                    'See How It Works');
-                    insightBtn.onclick = () => switchDemoMode('technical');
-                    chatArea.appendChild(insightBtn);
-                }, 1000);
-                
-            }, 2000);
-        }
-
-        // Helper Functions for "Try This" Actions (from Content Strategy Agent)
-        
-        function runFilesystemStory() {
-            const button = event.target;
-            const originalText = button.innerHTML;
-            
-            // Check if tutorial video is available
-            const tutorialVideo = '/videos/tutorials-Tutorial-recordings-Filesystem-chromium/video.webm';
-            
-            // Show loading state
-            button.innerHTML = '⏳ ' + (currentLanguage === 'da' ? 'AI Arbejder...' : 
-                                       currentLanguage === 'de' ? 'KI Arbeitet...' :
-                                       currentLanguage === 'es' ? 'IA Trabajando...' :
-                                       'AI Working...');
-            button.disabled = true;
-            
-            // Add tutorial video option if available
-            const chatArea = button.closest('.demo-chat');
-            if (chatArea) {
-                const videoOption = document.createElement('div');
-                videoOption.className = 'tutorial-video-option';
-                videoOption.innerHTML = `
-                    <div style="margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
-                        📹 <button onclick="showTutorialVideo('${tutorialVideo}')" style="background: #4CAF50; border: none; color: white; padding: 5px 10px; border-radius: 4px; cursor: pointer;">
-                            ${currentLanguage === 'da' ? 'Se Video Tutorial' : 
-                              currentLanguage === 'de' ? 'Video-Tutorial ansehen' :
-                              currentLanguage === 'es' ? 'Ver Tutorial en Video' :
-                              'Watch Video Tutorial'}
-                        </button>
-                    </div>
-                `;
-                chatArea.appendChild(videoOption);
-            }
-            
-            // Simulate the step-by-step release organization process
-            setTimeout(() => {
-                const chatArea = button.closest('.demo-chat');
-                
-                // Step 1: Subscribe to filesystem
-                addStoryStep(chatArea, '1. ' + (currentLanguage === 'da' ? 'Tilslutter til filsystem...' : 
-                                                 currentLanguage === 'de' ? 'Verbindung zu Dateisystem...' :
-                                                 currentLanguage === 'es' ? 'Conectando al sistema de archivos...' :
-                                                 'Subscribing to filesystem...'), 1000);
-                
-                // Step 2: Scan directory
-                addStoryStep(chatArea, '2. ' + (currentLanguage === 'da' ? 'Scanner Directory: Fandt 23 filer' : 
-                                                 currentLanguage === 'de' ? 'Verzeichnis scannen: 23 Dateien gefunden' :
-                                                 currentLanguage === 'es' ? 'Escaneando directorio: Encontradas 23 archivos' :
-                                                 'Scanning directory: Found 23 files'), 2500);
-                
-                // Step 3: Clean up logs
-                addStoryStep(chatArea, '3. ' + (currentLanguage === 'da' ? 'Rydder op i 8 gamle log filer' : 
-                                                 currentLanguage === 'de' ? 'Bereinigung von 8 alten Log-Dateien' :
-                                                 currentLanguage === 'es' ? 'Limpiando 8 archivos de log antiguos' :
-                                                 'Cleaning up 8 old log files'), 4000);
-                
-                // Step 4: Create release folder
-                addStoryStep(chatArea, '4. ' + (currentLanguage === 'da' ? 'Opretter release/ mappe' : 
-                                                 currentLanguage === 'de' ? 'Erstelle release/ Ordner' :
-                                                 currentLanguage === 'es' ? 'Creando carpeta release/' :
-                                                 'Creating release/ folder'), 5500);
-                
-                // Step 5: Move artifacts
-                addStoryStep(chatArea, '5. ' + (currentLanguage === 'da' ? 'Flytter 12 build artefakter' : 
-                                                 currentLanguage === 'de' ? 'Verschiebe 12 Build-Artefakte' :
-                                                 currentLanguage === 'es' ? 'Moviendo 12 artefactos de build' :
-                                                 'Moving 12 build artifacts'), 7000);
-                
-                // Step 6: Create zip
-                addStoryStep(chatArea, '6. ' + (currentLanguage === 'da' ? 'Opretter release-v2.1.3.zip (4.2MB)' : 
-                                                 currentLanguage === 'de' ? 'Erstelle release-v2.1.3.zip (4.2MB)' :
-                                                 currentLanguage === 'es' ? 'Creando release-v2.1.3.zip (4.2MB)' :
-                                                 'Creating release-v2.1.3.zip (4.2MB)'), 8500);
-                
-                // Final success
-                setTimeout(() => {
-                    const successMsg = document.createElement('div');
-                    successMsg.className = 'ai-message';
-                    successMsg.innerHTML = `
-                        <div class="ai-response" style="border-color: var(--success);">
-                            ✅ <strong>${currentLanguage === 'da' ? 'Release klar!' : currentLanguage === 'de' ? 'Release bereit!' : currentLanguage === 'es' ? '¡Release listo!' : 'Release ready!'}</strong><br>
-                            ${currentLanguage === 'da' ? 'Alle filer organiseret og pakket til distribution.' : 
-                              currentLanguage === 'de' ? 'Alle Dateien organisiert und für die Verteilung gepackt.' :
-                              currentLanguage === 'es' ? 'Todos los archivos organizados y empaquetados para distribución.' :
-                              'All files organized and packaged for distribution.'}
-                            <br><br>
-                            <button class="story-action-btn" onclick="switchDemoMode('technical')" style="margin-top: 12px;">
-                                🔧 ${currentLanguage === 'da' ? 'Se MCP Protokol' : currentLanguage === 'de' ? 'MCP-Protokoll Anzeigen' : currentLanguage === 'es' ? 'Ver Protocolo MCP' : 'View MCP Protocol'}
-                            </button>
-                        </div>
-                    `;
-                    chatArea.appendChild(successMsg);
-                }, 10000);
-                
-            }, 500);
-        }
-
-        function runTopCustomersStory() {
-            const button = event.target;
-            const tutorialVideo = '/videos/tutorials-Tutorial-recordings-Database-chromium/video.webm';
-            
-            button.innerHTML = '⏳ ' + (currentLanguage === 'da' ? 'Analyserer data...' : 
-                                       currentLanguage === 'de' ? 'Analysiere Daten...' :
-                                       currentLanguage === 'es' ? 'Analizando datos...' :
-                                       'Analyzing data...');
-            button.disabled = true;
-            
-            // Add tutorial video option
-            const chatArea = button.closest('.demo-chat');
-            if (chatArea) {
-                const videoOption = document.createElement('div');
-                videoOption.className = 'tutorial-video-option';
-                videoOption.innerHTML = `
-                    <div style="margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
-                        📹 <button onclick="showTutorialVideo('${tutorialVideo}')" style="background: #4CAF50; border: none; color: white; padding: 5px 10px; border-radius: 4px; cursor: pointer;">
-                            ${currentLanguage === 'da' ? 'Se Video Tutorial' : 
-                              currentLanguage === 'de' ? 'Video-Tutorial ansehen' :
-                              currentLanguage === 'es' ? 'Ver Tutorial en Video' :
-                              'Watch Video Tutorial'}
-                        </button>
-                    </div>
-                `;
-                chatArea.appendChild(videoOption);
-            }
-            
-            setTimeout(() => {
-                const chatArea = button.closest('.demo-chat');
-                
-                // Generate SQL
-                addStoryStep(chatArea, (currentLanguage === 'da' ? 'Genererer SQL: SELECT user_id, SUM(total) AS ltv...' : 
-                                        currentLanguage === 'de' ? 'Generiere SQL: SELECT user_id, SUM(total) AS ltv...' :
-                                        currentLanguage === 'es' ? 'Generando SQL: SELECT user_id, SUM(total) AS ltv...' :
-                                        'Generating SQL: SELECT user_id, SUM(total) AS ltv...'), 1000);
-                
-                // Query database
-                addStoryStep(chatArea, (currentLanguage === 'da' ? 'Forespørger database... Fandt 1,247 kunder' : 
-                                        currentLanguage === 'de' ? 'Abfrage der Datenbank... 1.247 Kunden gefunden' :
-                                        currentLanguage === 'es' ? 'Consultando base de datos... Encontrados 1,247 clientes' :
-                                        'Querying database... Found 1,247 customers'), 2500);
-                
-                // Show results
-                setTimeout(() => {
-                    const resultsMsg = document.createElement('div');
-                    resultsMsg.className = 'ai-message';
-                    resultsMsg.innerHTML = `
-                        <div class="ai-response" style="border-color: var(--success);">
-                            📊 <strong>${currentLanguage === 'da' ? 'Top 10 Kunder (Q4 2024):' : currentLanguage === 'de' ? 'Top 10 Kunden (Q4 2024):' : currentLanguage === 'es' ? 'Top 10 Clientes (Q4 2024):' : 'Top 10 Customers (Q4 2024):'}</strong><br><br>
-                            1. Sarah Johnson - $2,450<br>
-                            2. Mike Chen - $2,180<br>
-                            3. Emma Davis - $1,920<br>
-                            4. Alex Kumar - $1,750<br>
-                            5. Lisa Zhang - $1,680<br>
-                            <small style="opacity: 0.7;">...${currentLanguage === 'da' ? 'og 5 flere' : currentLanguage === 'de' ? 'und 5 weitere' : currentLanguage === 'es' ? 'y 5 más' : 'and 5 more'}</small>
-                            <br><br>
-                            <button class="story-action-btn" onclick="switchDemoMode('technical')" style="margin-top: 12px;">
-                                📈 ${currentLanguage === 'da' ? 'Se SQL Query' : currentLanguage === 'de' ? 'SQL-Abfrage Anzeigen' : currentLanguage === 'es' ? 'Ver Consulta SQL' : 'View SQL Query'}
-                            </button>
-                        </div>
-                    `;
-                    chatArea.appendChild(resultsMsg);
-                }, 4000);
-                
-            }, 500);
-        }
-
-        function runApiWorkflow() {
-            const button = event.target;
-            button.innerHTML = '⏳ ' + (currentLanguage === 'da' ? 'Kører workflow...' : 
-                                       currentLanguage === 'de' ? 'Workflow läuft...' :
-                                       currentLanguage === 'es' ? 'Ejecutando workflow...' :
-                                       'Running workflow...');
-            button.disabled = true;
-            
-            setTimeout(() => {
-                const chatArea = button.closest('.demo-chat');
-                
-                // Step 1: Create GitHub issue
-                addStoryStep(chatArea, '🐙 ' + (currentLanguage === 'da' ? 'Opretter GitHub issue...' : 
-                                                currentLanguage === 'de' ? 'Erstelle GitHub-Issue...' :
-                                                currentLanguage === 'es' ? 'Creando issue de GitHub...' :
-                                                'Creating GitHub issue...'), 1000);
-                
-                // Step 2: Issue created
-                addStoryStep(chatArea, '✅ ' + (currentLanguage === 'da' ? 'Issue oprettet: #247 "Daily Stand-up 2024-06-14"' : 
-                                                currentLanguage === 'de' ? 'Issue erstellt: #247 "Daily Stand-up 2024-06-14"' :
-                                                currentLanguage === 'es' ? 'Issue creado: #247 "Daily Stand-up 2024-06-14"' :
-                                                'Issue created: #247 "Daily Stand-up 2024-06-14"'), 2500);
-                
-                // Step 3: Post to Slack
-                addStoryStep(chatArea, '💬 ' + (currentLanguage === 'da' ? 'Sender besked til #dev-team kanal...' : 
-                                                currentLanguage === 'de' ? 'Sende Nachricht an #dev-team Kanal...' :
-                                                currentLanguage === 'es' ? 'Enviando mensaje al canal #dev-team...' :
-                                                'Posting to #dev-team channel...'), 4000);
-                
-                // Final success
-                setTimeout(() => {
-                    const successMsg = document.createElement('div');
-                    successMsg.className = 'ai-message';
-                    successMsg.innerHTML = `
-                        <div class="ai-response" style="border-color: var(--success);">
-                            🎉 <strong>${currentLanguage === 'da' ? 'Workflow fuldført!' : currentLanguage === 'de' ? 'Workflow abgeschlossen!' : currentLanguage === 'es' ? '¡Workflow completado!' : 'Workflow completed!'}</strong><br><br>
-                            ${currentLanguage === 'da' ? 'GitHub issue oprettet og team notificeret via Slack.' : 
-                              currentLanguage === 'de' ? 'GitHub-Issue erstellt und Team über Slack benachrichtigt.' :
-                              currentLanguage === 'es' ? 'Issue de GitHub creado y equipo notificado vía Slack.' :
-                              'GitHub issue created and team notified via Slack.'}<br>
-                            <small style="opacity: 0.7;">${currentLanguage === 'da' ? 'Zero konfiguration auth handling ✨' : currentLanguage === 'de' ? 'Null-Konfigurations-Auth-Handling ✨' : currentLanguage === 'es' ? 'Manejo de auth sin configuración ✨' : 'Zero boilerplate auth handling ✨'}</small>
-                            <br><br>
-                            <button class="story-action-btn" onclick="switchDemoMode('technical')" style="margin-top: 12px;">
-                                🔧 ${currentLanguage === 'da' ? 'Se API Calls' : currentLanguage === 'de' ? 'API-Aufrufe Anzeigen' : currentLanguage === 'es' ? 'Ver Llamadas API' : 'View API Calls'}
-                            </button>
-                        </div>
-                    `;
-                    chatArea.appendChild(successMsg);
-                }, 5500);
-                
-            }, 500);
-        }
-
-        function runLivePortfolioStory() {
-            const button = event.target;
-            button.innerHTML = '⏳ ' + (currentLanguage === 'da' ? 'Forbinder til live feeds...' : 
-                                       currentLanguage === 'de' ? 'Verbinde zu Live-Feeds...' :
-                                       currentLanguage === 'es' ? 'Conectando a feeds en vivo...' :
-                                       'Connecting to live feeds...');
-            button.disabled = true;
-            
-            setTimeout(() => {
-                const chatArea = button.closest('.demo-chat');
-                
-                // Connect to streams
-                addStoryStep(chatArea, '📡 ' + (currentLanguage === 'da' ? 'Tilslutter til finance.aapl stream...' : 
-                                                currentLanguage === 'de' ? 'Verbinde zu finance.aapl Stream...' :
-                                                currentLanguage === 'es' ? 'Conectando a stream finance.aapl...' :
-                                                'Subscribing to finance.aapl stream...'), 1000);
-                
-                addStoryStep(chatArea, '💻 ' + (currentLanguage === 'da' ? 'Tilslutter til system.cpu stream...' : 
-                                                currentLanguage === 'de' ? 'Verbinde zu system.cpu Stream...' :
-                                                currentLanguage === 'es' ? 'Conectando a stream system.cpu...' :
-                                                'Subscribing to system.cpu stream...'), 2000);
-                
-                // Live update
-                addStoryStep(chatArea, '📈 ' + (currentLanguage === 'da' ? 'AAPL: $195.43 (+2.1%) - Stigning opdaget!' : 
-                                                currentLanguage === 'de' ? 'AAPL: $195.43 (+2.1%) - Anstieg erkannt!' :
-                                                currentLanguage === 'es' ? 'AAPL: $195.43 (+2.1%) - ¡Subida detectada!' :
-                                                'AAPL: $195.43 (+2.1%) - Uptick detected!'), 3500);
-                
-                // AI insight
-                setTimeout(() => {
-                    const insightMsg = document.createElement('div');
-                    insightMsg.className = 'ai-message';
-                    insightMsg.innerHTML = `
-                        <div class="ai-response" style="border-color: var(--success);">
-                            🤖 <strong>${currentLanguage === 'da' ? 'AI Indsigt:' : currentLanguage === 'de' ? 'KI-Einblick:' : currentLanguage === 'es' ? 'Perspectiva de IA:' : 'AI Insight:'}</strong><br><br>
-                            ${currentLanguage === 'da' ? 'Din portefølje er oppe 3,2% i dag. AAPL driver væksten, mens trading bot performer optimalt (CPU: 65%).' : 
-                              currentLanguage === 'de' ? 'Ihr Portfolio ist heute um 3,2% gestiegen. AAPL treibt das Wachstum an, während der Trading-Bot optimal läuft (CPU: 65%).' :
-                              currentLanguage === 'es' ? 'Tu cartera subió 3.2% hoy. AAPL impulsa el crecimiento mientras el bot de trading funciona óptimamente (CPU: 65%).' :
-                              'Your portfolio is up 3.2% today. AAPL driving growth while trading bot performing optimally (CPU: 65%).'}<br><br>
-                            💡 ${currentLanguage === 'da' ? 'Overvej at rebalancere til energi sektoren.' : 
-                                 currentLanguage === 'de' ? 'Erwägen Sie eine Umschichtung in den Energiesektor.' :
-                                 currentLanguage === 'es' ? 'Considera rebalancear hacia el sector energético.' :
-                                 'Consider rebalancing toward energy sector.'}
-                            <br><br>
-                            <button class="story-action-btn" onclick="switchDemoMode('technical')" style="margin-top: 12px;">
-                                📊 ${currentLanguage === 'da' ? 'Se Live Charts' : currentLanguage === 'de' ? 'Live-Charts Anzeigen' : currentLanguage === 'es' ? 'Ver Gráficos en Vivo' : 'View Live Charts'}
-                            </button>
-                        </div>
-                    `;
-                    chatArea.appendChild(insightMsg);
-                }, 5000);
-                
-            }, 500);
-        }
-
-        function runDatabaseQuestion(type) {
-            const button = event.target;
-            const originalText = button.textContent;
-            
-            button.textContent = '⏳';
-            button.disabled = true;
-            
-            setTimeout(() => {
-                const responses = {
-                    'revenue': currentLanguage === 'da' ? 'December: $847K (↑12% vs November)' : 
-                               currentLanguage === 'de' ? 'Dezember: $847K (↑12% vs November)' :
-                               currentLanguage === 'es' ? 'Diciembre: $847K (↑12% vs Noviembre)' :
-                               'December: $847K (↑12% vs November)',
-                    'popular': currentLanguage === 'da' ? 'Top 3: Pro License (45%), Starter (32%), Enterprise (23%)' : 
-                               currentLanguage === 'de' ? 'Top 3: Pro-Lizenz (45%), Starter (32%), Enterprise (23%)' :
-                               currentLanguage === 'es' ? 'Top 3: Licencia Pro (45%), Starter (32%), Enterprise (23%)' :
-                               'Top 3: Pro License (45%), Starter (32%), Enterprise (23%)',
-                    'growth': currentLanguage === 'da' ? 'Nye kunder: +127 denne måned (+18% growth rate)' : 
-                              currentLanguage === 'de' ? 'Neue Kunden: +127 diesen Monat (+18% Wachstumsrate)' :
-                              currentLanguage === 'es' ? 'Nuevos clientes: +127 este mes (+18% tasa de crecimiento)' :
-                              'New customers: +127 this month (+18% growth rate)'
-                };
-                
-                const chatArea = button.closest('.question-chips').parentNode;
-                const resultMsg = document.createElement('div');
-                resultMsg.className = 'ai-message';
-                resultMsg.innerHTML = `
-                    <div class="ai-response">
-                        📊 ${responses[type]}
-                    </div>
-                `;
-                chatArea.appendChild(resultMsg);
-                
-                button.textContent = originalText;
-                button.disabled = false;
-            }, 1500);
-        }
-
-        // Tutorial Video Integration Functions
-        function showTutorialVideo(videoPath) {
-            const modal = document.createElement('div');
-            modal.className = 'tutorial-video-modal';
-            modal.style.cssText = `
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-                background: rgba(0,0,0,0.8); z-index: 10000; display: flex; 
-                align-items: center; justify-content: center;
-            `;
-            
-            modal.innerHTML = `
-                <div style="background: white; padding: 20px; border-radius: 12px; max-width: 80%; max-height: 80%;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                        <h3 style="margin: 0; color: #333;">📹 Tutorial Video</h3>
-                        <button onclick="this.closest('.tutorial-video-modal').remove()" 
-                                style="background: #f44336; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">✕</button>
-                    </div>
-                    <video controls autoplay style="width: 100%; max-width: 800px; border-radius: 8px;">
-                        <source src="${videoPath}" type="video/webm">
-                        <p>Your browser doesn't support video playback. 
-                           <a href="${videoPath}" target="_blank">Download video</a></p>
-                    </video>
-                    <p style="margin-top: 10px; color: #666; text-align: center;">
-                        ${currentLanguage === 'da' ? 'Se hvordan MCP protokollen fungerer i praksis' :
-                          currentLanguage === 'de' ? 'Sehen Sie, wie das MCP-Protokoll in der Praxis funktioniert' :
-                          currentLanguage === 'es' ? 'Vea cómo funciona el protocolo MCP en la práctica' :
-                          'See how the MCP protocol works in practice'}
-                    </p>
-                </div>
-            `;
-            
-            document.body.appendChild(modal);
-            
-            // Close on background click
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) modal.remove();
-            });
-        }
-
-        function checkForTutorialVideos() {
-            const videoMap = {
-                'filesystem': '/videos/tutorials-Tutorial-recordings-Filesystem-chromium/video.webm',
-                'database': '/videos/tutorials-Tutorial-recordings-Database-chromium/video.webm',
-                'api': '/videos/tutorials-Tutorial-recordings-API-chromium/video.webm',
-                'realtime': '/videos/tutorials-Tutorial-recordings-Realtime-chromium/video.webm'
-            };
-            
-            return videoMap;
-        }
-
-        function addStoryStep(container, message, delay) {
-            setTimeout(() => {
-                const stepMsg = document.createElement('div');
-                stepMsg.className = 'ai-message';
-                stepMsg.innerHTML = `
-                    <div class="ai-response" style="background: rgba(99, 102, 241, 0.1); border-color: var(--primary); color: #a5b4fc;">
-                        ${message}
-                    </div>
-                `;
-                container.appendChild(stepMsg);
-            }, delay);
-        }
-        
-        function closeDemoModal() {
-            const modal = document.getElementById('demoModal');
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-        
-        // Close modal on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeDemoModal();
-            }
-        });
-
-        // **FILESYSTEM DEMO GENERATOR**
-        function generateFilesystemDemo() {
-            return `
-                <div class="demo-container">
-                    <div class="demo-split">
-                        <div class="demo-left">
-                            <h3>📁 File System Explorer</h3>
-                            <div class="file-tree" id="fileTree">
-                                <div class="file-item folder" data-path="/">
-                                    <span class="file-icon">📁</span>
-                                    <span class="file-name">root</span>
-                                    <div class="file-children">
-                                        <div class="file-item folder" data-path="/documents">
-                                            <span class="file-icon">📁</span>
-                                            <span class="file-name">documents</span>
-                                            <div class="file-children">
-                                                <div class="file-item file" data-path="/documents/readme.txt">
-                                                    <span class="file-icon">📄</span>
-                                                    <span class="file-name">readme.txt</span>
-                                                </div>
-                                                <div class="file-item file" data-path="/documents/config.json">
-                                                    <span class="file-icon">⚙️</span>
-                                                    <span class="file-name">config.json</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="file-item folder" data-path="/logs">
-                                            <span class="file-icon">📁</span>
-                                            <span class="file-name">logs</span>
-                                            <div class="file-children">
-                                                <div class="file-item file" data-path="/logs/app.log">
-                                                    <span class="file-icon">📊</span>
-                                                    <span class="file-name">app.log</span>
-                                                </div>
-                                                <div class="file-item file" data-path="/logs/error.log">
-                                                    <span class="file-icon">❌</span>
-                                                    <span class="file-name">error.log</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="file-item file" data-path="/package.json">
-                                            <span class="file-icon">📦</span>
-                                            <span class="file-name">package.json</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="file-actions">
-                                <button class="action-btn" onclick="createFile()">📄 Create File</button>
-                                <button class="action-btn" onclick="createFolder()">📁 Create Folder</button>
-                                <button class="action-btn" onclick="deleteSelected()">🗑️ Delete</button>
-                            </div>
-                        </div>
-                        
-                        <div class="demo-right">
-                            <div class="demo-tabs">
-                                <button class="demo-tab active" onclick="switchTab('preview')">📄 File Preview</button>
-                                <button class="demo-tab" onclick="switchTab('protocol')">🔌 MCP Protocol</button>
-                            </div>
-                            
-                            <div class="demo-content">
-                                <div id="previewTab" class="tab-content active">
-                                    <div class="file-preview">
-                                        <div class="preview-header">
-                                            <span id="previewFileName">Select a file to preview</span>
-                                        </div>
-                                        <div class="preview-content" id="previewContent">
-                                            <p style="opacity: 0.7; text-align: center; padding: 40px;">
-                                                Click on a file in the explorer to see its contents
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div id="protocolTab" class="tab-content">
-                                    <div class="protocol-viewer">
-                                        <h4>MCP Protocol Messages</h4>
-                                        <div class="protocol-log" id="protocolLog">
-                                            <div class="protocol-message">
-                                                <div class="message-header">Request:</div>
-                                                <pre class="message-content">{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "method": "resources/list",
-  "params": {}
-}</pre>
-                                            </div>
-                                            <div class="protocol-message response">
-                                                <div class="message-header">Response:</div>
-                                                <pre class="message-content">{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": {
-    "resources": [
-      {
-        "uri": "file:///documents/readme.txt",
-        "name": "readme.txt",
-        "mimeType": "text/plain"
-      },
-      {
-        "uri": "file:///documents/config.json", 
-        "name": "config.json",
-        "mimeType": "application/json"
-      }
-    ]
-  }
-}</pre>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        // **FILESYSTEM DEMO FUNCTIONALITY**
-        let selectedFile = null;
-        let fileContents = {
-            '/documents/readme.txt': `# MCP Filesystem Integration
-
-This is a demonstration of how MCP (Model Context Protocol) can interact with your filesystem securely.
-
-## Features:
-- File browsing and navigation
-- Reading file contents
-- Creating and deleting files
-- Real-time protocol visualization
-
-## Security:
-- All operations are sandboxed
-- Permissions are explicitly granted
-- Full audit trail of all actions`,
-
-            '/documents/config.json': `{
-  "name": "mcp-filesystem-demo",
-  "version": "1.0.0",
-  "settings": {
-    "allowRead": true,
-    "allowWrite": true,
-    "maxFileSize": "10MB",
-    "allowedExtensions": [".txt", ".json", ".md", ".log"]
-  },
-  "security": {
-    "sandboxed": true,
-    "auditLog": true,
-    "permissions": "explicit"
-  }
-}`,
-
-            '/logs/app.log': `[2024-06-14 12:00:00] INFO: MCP server started
-[2024-06-14 12:00:01] INFO: Filesystem resource registered
-[2024-06-14 12:00:02] INFO: Client connected from 127.0.0.1
-[2024-06-14 12:01:15] INFO: File read request: /documents/readme.txt
-[2024-06-14 12:01:16] INFO: File content delivered (2.1KB)
-[2024-06-14 12:02:30] INFO: Directory listing requested: /documents
-[2024-06-14 12:02:31] INFO: 2 files found and returned`,
-
-            '/logs/error.log': `[2024-06-14 11:58:32] WARN: Attempted access to restricted path: /system
-[2024-06-14 11:58:32] ERROR: Permission denied - path outside sandbox
-[2024-06-14 12:05:44] WARN: File not found: /documents/missing.txt
-[2024-06-14 12:05:44] ERROR: ENOENT: no such file or directory`,
-
-            '/package.json': `{
-  "name": "mcp-demo-project",
-  "version": "1.0.0",
-  "description": "Demonstration project for MCP filesystem integration",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "test": "jest",
-    "mcp": "mcp-server filesystem"
-  },
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.0.0",
-    "express": "^4.18.2"
-  },
-  "devDependencies": {
-    "jest": "^29.0.0"
-  },
-  "keywords": ["mcp", "filesystem", "ai", "integration"],
-  "author": "MCP Demo Team",
-  "license": "MIT"
-}`
-        };
-
-        function initFilesystemDemo() {
-            // Initialize folder expansion
-            document.querySelectorAll('.file-item.folder').forEach(folder => {
-                folder.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    folder.classList.toggle('expanded');
-                });
-            });
-
-            // Initialize file selection
-            document.querySelectorAll('.file-item.file').forEach(file => {
-                file.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    
-                    // Remove previous selection
-                    document.querySelectorAll('.file-item.selected').forEach(item => {
-                        item.classList.remove('selected');
-                    });
-                    
-                    // Select current file
-                    file.classList.add('selected');
-                    selectedFile = file.getAttribute('data-path');
-                    
-                    // Update preview
-                    updateFilePreview(selectedFile);
-                    
-                    // Update protocol log
-                    addProtocolMessage('file-read', selectedFile);
-                });
-            });
-
-            // Expand root folder by default
-            document.querySelector('.file-item.folder[data-path="/"]').classList.add('expanded');
-        }
-
-        function updateFilePreview(filePath) {
-            const previewFileName = document.getElementById('previewFileName');
-            const previewContent = document.getElementById('previewContent');
-            
-            const fileName = filePath.split('/').pop();
-            previewFileName.textContent = fileName;
-            
-            const content = fileContents[filePath] || 'File content not available in demo';
-            previewContent.innerHTML = `<pre style="margin: 0; white-space: pre-wrap;">${content}</pre>`;
-        }
-
-        function addProtocolMessage(action, filePath) {
-            const protocolLog = document.getElementById('protocolLog');
-            if (!protocolLog) return;
-
-            const timestamp = new Date().toISOString();
-            let requestMessage, responseMessage;
-
-            if (action === 'file-read') {
-                requestMessage = {
-                    jsonrpc: "2.0",
-                    id: Math.floor(Math.random() * 1000),
-                    method: "resources/read",
-                    params: {
-                        uri: `file://${filePath}`
-                    }
-                };
-
-                responseMessage = {
-                    jsonrpc: "2.0",
-                    id: requestMessage.id,
-                    result: {
-                        contents: [{
-                            uri: `file://${filePath}`,
-                            mimeType: filePath.endsWith('.json') ? 'application/json' : 'text/plain',
-                            text: fileContents[filePath] || 'File content...'
-                        }]
-                    }
-                };
-            }
-
-            // Add request message
-            const requestDiv = document.createElement('div');
-            requestDiv.className = 'protocol-message';
-            requestDiv.innerHTML = `
-                <div class="message-header">Request (${timestamp}):</div>
-                <pre class="message-content">${JSON.stringify(requestMessage, null, 2)}</pre>
-            `;
-
-            // Add response message
-            const responseDiv = document.createElement('div');
-            responseDiv.className = 'protocol-message response';
-            responseDiv.innerHTML = `
-                <div class="message-header">Response:</div>
-                <pre class="message-content">${JSON.stringify(responseMessage, null, 2)}</pre>
-            `;
-
-            // Insert at the top
-            protocolLog.insertBefore(responseDiv, protocolLog.firstChild);
-            protocolLog.insertBefore(requestDiv, protocolLog.firstChild);
-
-            // Limit to 10 messages
-            const messages = protocolLog.querySelectorAll('.protocol-message');
-            if (messages.length > 10) {
-                for (let i = 10; i < messages.length; i++) {
-                    messages[i].remove();
-                }
-            }
-        }
-
-        function switchTab(tabName) {
-            // Update tab buttons
-            document.querySelectorAll('.demo-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            event.target.classList.add('active');
-
-            // Update tab content
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.getElementById(tabName + 'Tab').classList.add('active');
-        }
-
-        function createFile() {
-            const fileName = prompt('Enter file name:');
-            if (fileName) {
-                alert(`Created file: ${fileName}\n(This is a demo - no actual file created)`);
-                addProtocolMessage('file-create', `/documents/${fileName}`);
-            }
-        }
-
-        function createFolder() {
-            const folderName = prompt('Enter folder name:');
-            if (folderName) {
-                alert(`Created folder: ${folderName}\n(This is a demo - no actual folder created)`);
-                addProtocolMessage('folder-create', `/${folderName}`);
-            }
-        }
-
-        function deleteSelected() {
-            if (selectedFile) {
-                if (confirm(`Delete ${selectedFile}?`)) {
-                    alert(`Deleted: ${selectedFile}\n(This is a demo - no actual file deleted)`);
-                    addProtocolMessage('file-delete', selectedFile);
-                }
-            } else {
-                alert('Please select a file first');
-            }
-        }
-
-        // **DATABASE DEMO FUNCTIONALITY**
-        let currentDatabase = null;
-        
-        // Sample database data
-        const sampleData = {
-            users: [
-                { id: 1, name: 'Alice Johnson', email: 'alice@example.com', created_at: '2024-01-15 10:30:00' },
-                { id: 2, name: 'Bob Smith', email: 'bob@example.com', created_at: '2024-02-20 14:15:00' },
-                { id: 3, name: 'Carol Wilson', email: 'carol@example.com', created_at: '2024-03-10 09:45:00' },
-                { id: 4, name: 'David Brown', email: 'david@example.com', created_at: '2024-04-05 16:20:00' },
-                { id: 5, name: 'Eva Davis', email: 'eva@example.com', created_at: '2024-05-12 11:10:00' }
-            ],
-            orders: [
-                { id: 1, user_id: 1, product: 'Laptop Pro', amount: 1299.99, order_date: '2024-06-01 10:00:00' },
-                { id: 2, user_id: 2, product: 'Wireless Mouse', amount: 29.99, order_date: '2024-06-02 15:30:00' },
-                { id: 3, user_id: 1, product: 'USB-C Hub', amount: 79.99, order_date: '2024-06-03 09:15:00' },
-                { id: 4, user_id: 3, product: 'Monitor 4K', amount: 399.99, order_date: '2024-06-04 14:45:00' },
-                { id: 5, user_id: 4, product: 'Keyboard RGB', amount: 129.99, order_date: '2024-06-05 11:20:00' },
-                { id: 6, user_id: 2, product: 'Webcam HD', amount: 89.99, order_date: '2024-06-06 16:10:00' },
-                { id: 7, user_id: 5, product: 'Headset Pro', amount: 199.99, order_date: '2024-06-07 13:00:00' },
-                { id: 8, user_id: 1, product: 'Phone Case', amount: 19.99, order_date: '2024-06-08 10:30:00' },
-                { id: 9, user_id: 3, product: 'Tablet Stand', amount: 49.99, order_date: '2024-06-09 12:45:00' },
-                { id: 10, user_id: 4, product: 'Power Bank', amount: 59.99, order_date: '2024-06-10 08:20:00' },
-                { id: 11, user_id: 5, product: 'Wireless Charger', amount: 39.99, order_date: '2024-06-11 17:15:00' },
-                { id: 12, user_id: 2, product: 'Cable Kit', amount: 24.99, order_date: '2024-06-12 14:30:00' }
-            ],
-            products: [
-                { id: 1, name: 'Laptop Pro', price: 1299.99, category: 'Electronics', stock: 15 },
-                { id: 2, name: 'Wireless Mouse', price: 29.99, category: 'Accessories', stock: 50 },
-                { id: 3, name: 'USB-C Hub', price: 79.99, category: 'Accessories', stock: 25 },
-                { id: 4, name: 'Monitor 4K', price: 399.99, category: 'Electronics', stock: 8 },
-                { id: 5, name: 'Keyboard RGB', price: 129.99, category: 'Accessories', stock: 20 },
-                { id: 6, name: 'Webcam HD', price: 89.99, category: 'Electronics', stock: 12 },
-                { id: 7, name: 'Headset Pro', price: 199.99, category: 'Audio', stock: 18 },
-                { id: 8, name: 'Phone Case', price: 19.99, category: 'Accessories', stock: 100 }
-            ]
-        };
-
-        function initDatabaseDemo() {
-            // Initialize the database
-            currentDatabase = sampleData;
-            
-            // Set up table expansion
-            document.querySelectorAll('.schema-table').forEach(table => {
-                const header = table.querySelector('.table-header');
-                const columns = table.querySelector('.table-columns');
-                
-                header.addEventListener('click', () => {
-                    const isExpanded = columns.style.display === 'block';
-                    columns.style.display = isExpanded ? 'none' : 'block';
-                });
-                
-                // Expand first table by default
-                if (table.dataset.table === 'users') {
-                    columns.style.display = 'block';
-                }
-            });
-        }
-
-        function runQuickQuery(query) {
-            const sqlEditor = document.getElementById('sqlEditor');
-            if (sqlEditor) {
-                sqlEditor.value = query;
-                executeQuery();
-            }
-        }
-
-        function executeQuery() {
-            const sqlEditor = document.getElementById('sqlEditor');
-            const query = sqlEditor.value.trim();
-            
-            if (!query) {
-                showQueryError('Please enter a SQL query');
-                return;
-            }
-
-            try {
-                const result = executeSQL(query);
-                displayQueryResults(result, query);
-                addDbProtocolMessage(query, result);
-                
-                // Switch to results tab
-                switchDbTab('results');
-            } catch (error) {
-                showQueryError(error.message);
-                addDbProtocolMessage(query, null, error.message);
-            }
-        }
-
-        function executeSQL(query) {
-            // Simple SQL parser for demo purposes
-            const normalizedQuery = query.toLowerCase().trim();
-            
-            if (normalizedQuery.startsWith('select')) {
-                return executeSelect(query);
-            } else if (normalizedQuery.startsWith('insert')) {
-                return executeInsert(query);
-            } else if (normalizedQuery.startsWith('update')) {
-                return executeUpdate(query);
-            } else if (normalizedQuery.startsWith('delete')) {
-                return executeDelete(query);
-            } else {
-                throw new Error('Unsupported SQL operation. This demo supports SELECT, INSERT, UPDATE, DELETE.');
-            }
-        }
-
-        function executeSelect(query) {
-            // Parse basic SELECT queries
-            const normalizedQuery = query.toLowerCase();
-            
-            // Extract table name
-            let tableName = '';
-            const fromMatch = normalizedQuery.match(/from\\s+(\\w+)/);
-            if (fromMatch) {
-                tableName = fromMatch[1];
-            }
-            
-            if (!currentDatabase[tableName]) {
-                throw new Error(`Table '${tableName}' does not exist`);
-            }
-            
-            let data = [...currentDatabase[tableName]];
-            
-            // Handle JOINs (simplified)
-            if (normalizedQuery.includes('join')) {
-                data = handleJoins(query, data);
-            }
-            
-            // Handle WHERE clause (simplified)
-            if (normalizedQuery.includes('where')) {
-                data = handleWhere(query, data);
-            }
-            
-            // Handle GROUP BY (simplified)
-            if (normalizedQuery.includes('group by')) {
-                data = handleGroupBy(query, data);
-            }
-            
-            // Handle ORDER BY (simplified)
-            if (normalizedQuery.includes('order by')) {
-                data = handleOrderBy(query, data);
-            }
-            
-            // Handle LIMIT (simplified)
-            if (normalizedQuery.includes('limit')) {
-                const limitMatch = normalizedQuery.match(/limit\\s+(\\d+)/);
-                if (limitMatch) {
-                    data = data.slice(0, parseInt(limitMatch[1]));
-                }
-            }
-            
-            return {
-                type: 'select',
-                data: data,
-                rowCount: data.length
-            };
-        }
-
-        function handleJoins(query, data) {
-            // Simplified JOIN implementation for common cases
-            const normalizedQuery = query.toLowerCase();
-            
-            if (normalizedQuery.includes('users') && normalizedQuery.includes('orders')) {
-                // JOIN users and orders
-                const result = [];
-                currentDatabase.users.forEach(user => {
-                    const userOrders = currentDatabase.orders.filter(order => order.user_id === user.id);
-                    if (userOrders.length > 0) {
-                        userOrders.forEach(order => {
-                            result.push({ ...user, ...order });
-                        });
-                    } else if (normalizedQuery.includes('left join')) {
-                        result.push({ ...user, order_id: null, product: null, amount: null, order_date: null });
-                    }
-                });
-                return result;
-            }
-            
-            return data;
-        }
-
-        function handleWhere(query, data) {
-            // Very simplified WHERE clause handling
-            const whereMatch = query.match(/where\\s+(.+?)(?:\\s+order|\\s+group|\\s+limit|$)/i);
-            if (whereMatch) {
-                const condition = whereMatch[1].trim();
-                
-                // Handle stock > 0 condition
-                if (condition.includes('stock > 0')) {
-                    return data.filter(item => item.stock && item.stock > 0);
-                }
-                
-                // Handle LIMIT in subquery
-                if (condition.includes('LIMIT')) {
-                    const limitMatch = condition.match(/LIMIT\\s+(\\d+)/i);
-                    if (limitMatch) {
-                        return data.slice(0, parseInt(limitMatch[1]));
-                    }
-                }
-            }
-            
-            return data;
-        }
-
-        function handleGroupBy(query, data) {
-            // Simplified GROUP BY with COUNT
-            if (query.toLowerCase().includes('count(o.id)') && query.toLowerCase().includes('group by u.id')) {
-                // User order counts
-                const userCounts = {};
-                
-                data.forEach(item => {
-                    const key = item.name || item.user_id;
-                    if (!userCounts[key]) {
-                        userCounts[key] = { name: item.name || `User ${item.user_id}`, order_count: 0 };
-                    }
-                    if (item.id && item.user_id) {
-                        userCounts[key].order_count++;
-                    }
-                });
-                
-                return Object.values(userCounts);
-            }
-            
-            return data;
-        }
-
-        function handleOrderBy(query, data) {
-            const orderMatch = query.match(/order by\\s+(\\w+)(?:\\s+(asc|desc))?/i);
-            if (orderMatch) {
-                const column = orderMatch[1];
-                const direction = (orderMatch[2] || 'asc').toLowerCase();
-                
-                return data.sort((a, b) => {
-                    const aVal = a[column];
-                    const bVal = b[column];
-                    
-                    if (direction === 'desc') {
-                        return bVal > aVal ? 1 : -1;
-                    } else {
-                        return aVal > bVal ? 1 : -1;
-                    }
-                });
-            }
-            
-            return data;
-        }
-
-        function executeInsert(query) {
-            // Demo INSERT - just return success message
-            return {
-                type: 'insert',
-                message: 'INSERT executed successfully (demo mode)',
-                rowsAffected: 1
-            };
-        }
-
-        function executeUpdate(query) {
-            // Demo UPDATE - just return success message
-            return {
-                type: 'update',
-                message: 'UPDATE executed successfully (demo mode)',
-                rowsAffected: 1
-            };
-        }
-
-        function executeDelete(query) {
-            // Demo DELETE - just return success message
-            return {
-                type: 'delete',
-                message: 'DELETE executed successfully (demo mode)',
-                rowsAffected: 1
-            };
-        }
-
-        function displayQueryResults(result, query) {
-            const resultsInfo = document.getElementById('resultsInfo');
-            const resultsContent = document.getElementById('resultsContent');
-            
-            if (result.type === 'select' && result.data && result.data.length > 0) {
-                resultsInfo.textContent = `Query executed successfully. ${result.rowCount} rows returned.`;
-                
-                // Create table
-                const table = document.createElement('table');
-                table.className = 'results-table';
-                
-                // Create header
-                const thead = document.createElement('thead');
-                const headerRow = document.createElement('tr');
-                const columns = Object.keys(result.data[0]);
-                
-                columns.forEach(column => {
-                    const th = document.createElement('th');
-                    th.textContent = column;
-                    headerRow.appendChild(th);
-                });
-                thead.appendChild(headerRow);
-                table.appendChild(thead);
-                
-                // Create body
-                const tbody = document.createElement('tbody');
-                result.data.forEach(row => {
-                    const tr = document.createElement('tr');
-                    columns.forEach(column => {
-                        const td = document.createElement('td');
-                        td.textContent = row[column] || '';
-                        tr.appendChild(td);
-                    });
-                    tbody.appendChild(tr);
-                });
-                table.appendChild(tbody);
-                
-                resultsContent.innerHTML = '';
-                resultsContent.appendChild(table);
-                
-            } else if (result.type === 'select') {
-                resultsInfo.textContent = 'Query executed successfully. No rows returned.';
-                resultsContent.innerHTML = '<p style="opacity: 0.7; text-align: center; padding: 40px;">No results found</p>';
-                
-            } else {
-                resultsInfo.textContent = result.message;
-                resultsContent.innerHTML = `<p style="color: #22c55e; text-align: center; padding: 40px;">${result.message}</p>`;
-            }
-        }
-
-        function showQueryError(error) {
-            const resultsInfo = document.getElementById('resultsInfo');
-            const resultsContent = document.getElementById('resultsContent');
-            
-            resultsInfo.textContent = 'Query failed';
-            resultsContent.innerHTML = `<div class="query-error"><strong>Error:</strong> ${error}</div>`;
-            
-            // Switch to results tab
-            switchDbTab('results');
-        }
-
-        function addDbProtocolMessage(query, result, error) {
-            const protocolLog = document.getElementById('dbProtocolLog');
-            if (!protocolLog) return;
-
-            const timestamp = new Date().toISOString();
-            const requestId = Math.floor(Math.random() * 1000);
-
-            const requestMessage = {
-                jsonrpc: "2.0",
-                id: requestId,
-                method: "tools/call",
-                params: {
-                    name: "query_database",
-                    arguments: {
-                        query: query
-                    }
-                }
-            };
-
-            let responseMessage;
-            if (error) {
-                responseMessage = {
-                    jsonrpc: "2.0",
-                    id: requestId,
-                    error: {
-                        code: -1,
-                        message: error
-                    }
-                };
-            } else {
-                responseMessage = {
-                    jsonrpc: "2.0",
-                    id: requestId,
-                    result: {
-                        content: [{
-                            type: "text",
-                            text: result.type === 'select' ? 
-                                  `Query executed successfully. ${result.rowCount} rows returned.` :
-                                  result.message
-                        }],
-                        isError: false
-                    }
-                };
-            }
-
-            // Add request message
-            const requestDiv = document.createElement('div');
-            requestDiv.className = 'protocol-message';
-            requestDiv.innerHTML = `
-                <div class="message-header">Request (${timestamp}):</div>
-                <pre class="message-content">${JSON.stringify(requestMessage, null, 2)}</pre>
-            `;
-
-            // Add response message
-            const responseDiv = document.createElement('div');
-            responseDiv.className = error ? 'protocol-message error' : 'protocol-message response';
-            responseDiv.innerHTML = `
-                <div class="message-header">Response:</div>
-                <pre class="message-content">${JSON.stringify(responseMessage, null, 2)}</pre>
-            `;
-
-            // Insert at the top
-            protocolLog.insertBefore(responseDiv, protocolLog.firstChild);
-            protocolLog.insertBefore(requestDiv, protocolLog.firstChild);
-
-            // Limit to 6 messages (3 request/response pairs)
-            const messages = protocolLog.querySelectorAll('.protocol-message');
-            if (messages.length > 6) {
-                for (let i = 6; i < messages.length; i++) {
-                    messages[i].remove();
-                }
-            }
-        }
-
-        function switchDbTab(tabName) {
-            // Update tab buttons
-            document.querySelectorAll('.demo-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            event.target.classList.add('active');
-
-            // Update tab content
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.getElementById(tabName + 'Tab').classList.add('active');
-        }
-
-        // **PLACEHOLDER DEMO GENERATORS** (To be implemented in next checkpoints)
-        function generateDatabaseDemo() {
-            return `
-                <div class="demo-container">
-                    <div class="demo-split">
-                        <div class="demo-left">
-                            <h3>🗄️ Database Connection</h3>
-                            <div class="db-connection-status">
-                                <div class="connection-indicator">
-                                    <span class="status-dot connected"></span>
-                                    <span>Connected to demo SQLite database</span>
-                                </div>
-                            </div>
-                            
-                            <div class="db-schema-browser">
-                                <h4>Database Schema</h4>
-                                <div class="schema-tree">
-                                    <div class="schema-table" data-table="users">
-                                        <div class="table-header">
-                                            <span class="table-icon">👥</span>
-                                            <span class="table-name">users</span>
-                                            <span class="table-count">(5 rows)</span>
-                                        </div>
-                                        <div class="table-columns">
-                                            <div class="column">id (INTEGER PRIMARY KEY)</div>
-                                            <div class="column">name (TEXT)</div>
-                                            <div class="column">email (TEXT)</div>
-                                            <div class="column">created_at (DATETIME)</div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="schema-table" data-table="orders">
-                                        <div class="table-header">
-                                            <span class="table-icon">📦</span>
-                                            <span class="table-name">orders</span>
-                                            <span class="table-count">(12 rows)</span>
-                                        </div>
-                                        <div class="table-columns">
-                                            <div class="column">id (INTEGER PRIMARY KEY)</div>
-                                            <div class="column">user_id (INTEGER)</div>
-                                            <div class="column">product (TEXT)</div>
-                                            <div class="column">amount (DECIMAL)</div>
-                                            <div class="column">order_date (DATETIME)</div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="schema-table" data-table="products">
-                                        <div class="table-header">
-                                            <span class="table-icon">🛍️</span>
-                                            <span class="table-name">products</span>
-                                            <span class="table-count">(8 rows)</span>
-                                        </div>
-                                        <div class="table-columns">
-                                            <div class="column">id (INTEGER PRIMARY KEY)</div>
-                                            <div class="column">name (TEXT)</div>
-                                            <div class="column">price (DECIMAL)</div>
-                                            <div class="column">category (TEXT)</div>
-                                            <div class="column">stock (INTEGER)</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="quick-queries">
-                                <h4>Quick Queries</h4>
-                                <button class="query-btn" onclick="runQuickQuery('SELECT * FROM users LIMIT 5')">Show Users</button>
-                                <button class="query-btn" onclick="runQuickQuery('SELECT * FROM orders ORDER BY order_date DESC LIMIT 5')">Recent Orders</button>
-                                <button class="query-btn" onclick="runQuickQuery('SELECT p.name, p.price, p.stock FROM products p WHERE p.stock > 0')">Available Products</button>
-                                <button class="query-btn" onclick="runQuickQuery('SELECT u.name, COUNT(o.id) as order_count FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id, u.name')">User Statistics</button>
-                            </div>
-                        </div>
-                        
-                        <div class="demo-right">
-                            <div class="demo-tabs">
-                                <button class="demo-tab active" onclick="switchDbTab('query')">💻 SQL Query</button>
-                                <button class="demo-tab" onclick="switchDbTab('results')">📊 Results</button>
-                                <button class="demo-tab" onclick="switchDbTab('protocol')">🔌 MCP Protocol</button>
-                            </div>
-                            
-                            <div class="demo-content">
-                                <div id="queryTab" class="tab-content active">
-                                    <div class="sql-editor">
-                                        <div class="editor-header">
-                                            <span>SQL Query Editor</span>
-                                            <button class="run-query-btn" onclick="executeQuery()">▶ Run Query</button>
-                                        </div>
-                                        <textarea id="sqlEditor" class="sql-textarea" placeholder="Enter your SQL query here...
-Example:
-SELECT u.name, u.email, COUNT(o.id) as total_orders
-FROM users u 
-LEFT JOIN orders o ON u.id = o.user_id 
-GROUP BY u.id, u.name, u.email
-ORDER BY total_orders DESC;">SELECT * FROM users LIMIT 5;</textarea>
-                                    </div>
-                                </div>
-                                
-                                <div id="resultsTab" class="tab-content">
-                                    <div class="query-results">
-                                        <div class="results-header">
-                                            <span id="resultsInfo">Execute a query to see results</span>
-                                        </div>
-                                        <div class="results-content" id="resultsContent">
-                                            <p style="opacity: 0.7; text-align: center; padding: 40px;">
-                                                Run a SQL query to see the results here
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div id="protocolTab" class="tab-content">
-                                    <div class="protocol-viewer">
-                                        <h4>MCP Protocol Messages</h4>
-                                        <div class="protocol-log" id="dbProtocolLog">
-                                            <div class="protocol-message">
-                                                <div class="message-header">Request:</div>
-                                                <pre class="message-content">{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "method": "tools/call",
-  "params": {
-    "name": "query_database",
-    "arguments": {
-      "query": "SELECT * FROM users LIMIT 5"
-    }
-  }
-}</pre>
-                                            </div>
-                                            <div class="protocol-message response">
-                                                <div class="message-header">Response:</div>
-                                                <pre class="message-content">{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": {
-    "content": [{
-      "type": "text",
-      "text": "Query executed successfully. 5 rows returned."
-    }],
-    "isError": false
-  }
-}</pre>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function generateApiDemo() {
-            return `
-                <div style="text-align: center; padding: 60px 20px;">
-                    <h3>🌐 API Integration Demo</h3>
-                    <p style="opacity: 0.8; margin-bottom: 20px;">Coming in Checkpoint 3...</p>
-                    <div style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 20px;">
-                        <p>This demo will include:</p>
-                        <ul style="text-align: left; max-width: 400px; margin: 0 auto;">
-                            <li>HTTP request builder</li>
-                            <li>Real API examples (JSONPlaceholder, Weather)</li>
-                            <li>Authentication examples</li>
-                            <li>Request/response visualization</li>
-                            <li>cURL command generation</li>
-                        </ul>
-                    </div>
-                </div>
-            `;
-        }
-
-        // API Demo Functions
-        function initApiDemo() {
-            // Initialize default state
-            window.currentApiService = 'jsonplaceholder';
-            window.currentMethod = 'GET';
-            window.currentEndpoint = '/users';
-            
-            // Initialize event listeners if not already done
-            const httpMethodSelect = document.getElementById('httpMethod');
-            if (httpMethodSelect && !httpMethodSelect.hasListener) {
-                httpMethodSelect.hasListener = true;
-                httpMethodSelect.addEventListener('change', (e) => {
-                    updateRequestBody(e.target.value);
-                });
-            }
-        }
-
-        function selectApiService(service) {
-            // Update active tab
-            document.querySelectorAll('.api-service-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            event.target.closest('.api-service-tab').classList.add('active');
-            
-            // Update current service
-            window.currentApiService = service;
-            
-            // Update endpoints list based on service
-            const endpointsList = document.getElementById('endpointsList');
-            endpointsList.innerHTML = getEndpointsForService(service);
-            
-            // Update base URL
-            updateBaseUrl(service);
-        }
-
-        function getEndpointsForService(service) {
-            const endpoints = {
-                jsonplaceholder: [
-                    { method: 'GET', path: '/users', desc: 'List all users' },
-                    { method: 'GET', path: '/users/{id}', desc: 'Get single user' },
-                    { method: 'GET', path: '/posts', desc: 'List all posts' },
-                    { method: 'POST', path: '/posts', desc: 'Create new post' },
-                    { method: 'PUT', path: '/posts/{id}', desc: 'Update post' },
-                    { method: 'DELETE', path: '/posts/{id}', desc: 'Delete post' },
-                    { method: 'GET', path: '/comments', desc: 'List all comments' },
-                ],
-                openweather: [
-                    { method: 'GET', path: '/weather', desc: 'Current weather' },
-                    { method: 'GET', path: '/forecast', desc: '5 day forecast' },
-                    { method: 'GET', path: '/air_pollution', desc: 'Air quality data' },
-                ],
-                github: [
-                    { method: 'GET', path: '/user', desc: 'Get authenticated user' },
-                    { method: 'GET', path: '/users/{username}', desc: 'Get user profile' },
-                    { method: 'GET', path: '/users/{username}/repos', desc: 'List user repos' },
-                    { method: 'POST', path: '/user/repos', desc: 'Create repository' },
-                ]
-            };
-            
-            return endpoints[service].map((endpoint, index) => `
-                <div class="endpoint-item ${index === 0 ? 'active' : ''}" onclick="selectEndpoint('${endpoint.path}', '${endpoint.method}', '${endpoint.desc}')">
-                    <span class="method-badge method-${endpoint.method.toLowerCase()}">${endpoint.method}</span>
-                    <span class="endpoint-path">${endpoint.path}</span>
-                    <span class="endpoint-desc">${endpoint.desc}</span>
-                </div>
-            `).join('');
-        }
-
-        function updateBaseUrl(service) {
-            const urlInput = document.getElementById('apiUrl');
-            const baseUrls = {
-                jsonplaceholder: 'https://jsonplaceholder.typicode.com',
-                openweather: 'https://api.openweathermap.org/data/2.5',
-                github: 'https://api.github.com'
-            };
-            
-            const currentPath = window.currentEndpoint || '/users';
-            urlInput.value = baseUrls[service] + currentPath.replace('{id}', '1').replace('{username}', 'octocat');
-        }
-
-        function selectEndpoint(path, method, description) {
-            // Update active state
-            document.querySelectorAll('.endpoint-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            event.target.closest('.endpoint-item').classList.add('active');
-            
-            // Update current endpoint
-            window.currentEndpoint = path;
-            window.currentMethod = method;
-            
-            // Update method select
-            document.getElementById('httpMethod').value = method;
-            
-            // Update URL
-            updateBaseUrl(window.currentApiService);
-            
-            // Update request body visibility
-            updateRequestBody(method);
-            
-            // Update MCP protocol preview
-            updateProtocolPreview();
-        }
-
-        function updateRequestBody(method) {
-            const bodySection = document.getElementById('bodySection');
-            if (method === 'POST' || method === 'PUT') {
-                bodySection.style.display = 'block';
-            } else {
-                bodySection.style.display = 'none';
-            }
-        }
-
-        function updateAuthType(authType) {
-            const authFields = document.getElementById('authFields');
-            if (authType === 'none') {
-                authFields.style.display = 'none';
-            } else {
-                authFields.style.display = 'block';
-                const authInput = document.getElementById('authValue');
-                authInput.placeholder = authType === 'apikey' ? 'Enter API Key...' : 'Enter Bearer Token...';
-            }
-        }
-
-        function addHeaderField() {
-            const headersList = document.getElementById('headersList');
-            const newHeader = document.createElement('div');
-            newHeader.className = 'header-item editable';
-            newHeader.innerHTML = `
-                <input type="text" class="header-key-input" placeholder="Header name" value="">
-                <input type="text" class="header-value-input" placeholder="Header value" value="">
-                <button class="remove-header" onclick="this.parentElement.remove()">×</button>
-            `;
-            headersList.appendChild(newHeader);
-        }
-
-        async function sendApiRequest() {
-            const method = document.getElementById('httpMethod').value;
-            const url = document.getElementById('apiUrl').value;
-            const responseStatus = document.getElementById('responseStatus');
-            const responseBody = document.getElementById('responseBody');
-            
-            // Update status
-            responseStatus.className = 'response-status';
-            responseStatus.innerHTML = '<span class="status-text">Sending request...</span>';
-            
-            // Build headers
-            const headers = {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            };
-            
-            // Add auth if needed
-            const authType = document.querySelector('input[name="authType"]:checked').value;
-            if (authType !== 'none') {
-                const authValue = document.getElementById('authValue').value;
-                if (authType === 'apikey') {
-                    headers['X-API-Key'] = authValue;
-                } else {
-                    headers['Authorization'] = `Bearer ${authValue}`;
-                }
-            }
-            
-            // Build request options
-            const options = {
-                method: method,
-                headers: headers
-            };
-            
-            // Add body for POST/PUT
-            if (method === 'POST' || method === 'PUT') {
-                const bodyContent = document.getElementById('requestBody').value;
-                try {
-                    options.body = JSON.stringify(JSON.parse(bodyContent));
-                } catch (e) {
-                    responseStatus.className = 'response-status error';
-                    responseStatus.innerHTML = '<span class="status-text">Error: Invalid JSON in request body</span>';
-                    responseBody.innerHTML = '<pre class="response-json">Please fix the JSON syntax in the request body.</pre>';
-                    return;
-                }
-            }
-            
-            // Log MCP protocol
-            logApiProtocol(method, url, headers, options.body);
-            
-            try {
-                // For demo purposes, simulate the API call instead of making real requests
-                const response = await simulateApiCall(method, url, options);
-                
-                // Update status
-                responseStatus.className = response.ok ? 'response-status success' : 'response-status error';
-                responseStatus.innerHTML = `
-                    <span class="status-text">
-                        ${response.status} ${response.statusText}
-                    </span>
-                    <span class="response-time">${response.time}ms</span>
-                `;
-                
-                // Update response body
-                const data = await response.json();
-                responseBody.innerHTML = `<pre class="response-json">${JSON.stringify(data, null, 2)}</pre>`;
-                
-                // Switch to response tab
-                switchApiTab('response');
-                
-            } catch (error) {
-                responseStatus.className = 'response-status error';
-                responseStatus.innerHTML = '<span class="status-text">Request failed</span>';
-                responseBody.innerHTML = `<pre class="response-json">Error: ${error.message}</pre>`;
-            }
-            
-            // Update cURL command
-            updateCurlCommand(method, url, headers, options.body);
-        }
-
-        async function simulateApiCall(method, url, options) {
-            // Simulate network delay
-            await new Promise(resolve => setTimeout(resolve, 300 + Math.random() * 500));
-            
-            // Parse URL to determine response
-            const urlObj = new URL(url);
-            const path = urlObj.pathname;
-            
-            // Simulated responses based on endpoint
-            const responses = {
-                '/users': [
-                    { id: 1, name: 'Leanne Graham', username: 'Bret', email: 'Sincere@april.biz' },
-                    { id: 2, name: 'Ervin Howell', username: 'Antonette', email: 'Shanna@melissa.tv' },
-                    { id: 3, name: 'Clementine Bauch', username: 'Samantha', email: 'Nathan@yesenia.net' }
                 ],
                 '/users/1': { id: 1, name: 'Leanne Graham', username: 'Bret', email: 'Sincere@april.biz' },
                 '/posts': [
@@ -7350,6 +4967,206 @@ ORDER BY total_orders DESC;">SELECT * FROM users LIMIT 5;</textarea>
             
             console.log('🚀 MCP Hub loaded successfully with all premium features!');
         });
+        
+        // Revolutionary Demo Launcher Functions
+        function openDemoLauncher() {
+            // Enhanced demo launcher with smart recommendation
+            const demos = ['filesystem', 'database', 'api', 'realtime'];
+            const randomDemo = demos[Math.floor(Math.random() * demos.length)];
+            
+            // Add visual feedback
+            const launcherBtn = document.querySelector('.demo-launcher-btn');
+            launcherBtn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                launcherBtn.style.transform = 'scale(1)';
+                openDemoModal(randomDemo, 'story');
+            }, 150);
+        }
+        
+        function quickDemo(demoType) {
+            // Enhanced quick demo with instant feedback
+            const previewItem = document.querySelector(`[data-demo="${demoType}"]`);
+            
+            // Add launching state
+            previewItem.classList.add('launching');
+            
+            setTimeout(() => {
+                previewItem.classList.remove('launching');
+                showQuickDemoModal(demoType);
+            }, 800);
+        }
+        
+        function showQuickDemoModal(demoType) {
+            // Create or show quick demo modal
+            let modal = document.getElementById('quickDemoModal');
+            
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'quickDemoModal';
+                modal.className = 'quick-demo-modal';
+                modal.innerHTML = `
+                    <div class="quick-demo-content">
+                        <div class="quick-demo-header">
+                            <div class="quick-demo-icon" id="quickDemoIcon">📁</div>
+                            <h3 class="quick-demo-title" id="quickDemoTitle">Demo Title</h3>
+                        </div>
+                        <div class="quick-demo-body" id="quickDemoBody">
+                            Demo description will appear here...
+                        </div>
+                        <div class="quick-demo-actions">
+                            <button class="btn btn-secondary" onclick="closeQuickDemo()">Close</button>
+                            <button class="btn btn-primary" onclick="launchFullDemo()">Try Full Demo</button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            }
+            
+            // Update content based on demo type
+            const demoData = {
+                'filesystem': {
+                    icon: '📁',
+                    title: getTranslation('demo.filesystem.title'),
+                    description: 'Experience how MCP enables AI to securely interact with your file system. Create, read, and manage files through AI commands with built-in security and permissions.'
+                },
+                'database': {
+                    icon: '🗄️',
+                    title: getTranslation('demo.database.title'), 
+                    description: 'See MCP connect AI to databases in real-time. Query data, generate reports, and perform complex database operations through natural language.'
+                },
+                'api': {
+                    icon: '🌐',
+                    title: getTranslation('demo.api.title'),
+                    description: 'Watch MCP integrate third-party APIs seamlessly. Connect to web services, manage authentication, and orchestrate complex API workflows.'
+                },
+                'realtime': {
+                    icon: '⚡',
+                    title: getTranslation('demo.realtime.title'),
+                    description: 'Explore real-time data streaming with MCP. Monitor live metrics, handle events, and build reactive AI applications.'
+                }
+            };
+            
+            const data = demoData[demoType];
+            document.getElementById('quickDemoIcon').textContent = data.icon;
+            document.getElementById('quickDemoTitle').textContent = data.title;
+            document.getElementById('quickDemoBody').textContent = data.description;
+            
+            // Store current demo type for full demo launch
+            modal.setAttribute('data-demo-type', demoType);
+            
+            // Show modal with animation
+            modal.classList.add('active');
+        }
+        
+        function closeQuickDemo() {
+            const modal = document.getElementById('quickDemoModal');
+            if (modal) {
+                modal.classList.remove('active');
+            }
+        }
+        
+        function launchFullDemo() {
+            const modal = document.getElementById('quickDemoModal');
+            const demoType = modal.getAttribute('data-demo-type');
+            
+            closeQuickDemo();
+            
+            setTimeout(() => {
+                openDemoModal(demoType, 'story');
+            }, 300);
+        }
+        
+        // Enhanced demo card interactions
+        function enhanceDemoCards() {
+            const demoCards = document.querySelectorAll('.demo-card');
+            
+            demoCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    // Add subtle animation on hover
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        }
+        
+        // Initialize enhanced demo interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            enhanceDemoCards();
+            initSectionReveal();
+            initNavigationEffects();
+            initGlowEffects();
+        });
+        
+        // Section Reveal Animation System
+        function initSectionReveal() {
+            const sections = document.querySelectorAll('section');
+            
+            // Add reveal class to all sections
+            sections.forEach(section => {
+                section.classList.add('section-reveal');
+            });
+            
+            // Intersection Observer for reveal animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            sections.forEach(section => observer.observe(section));
+        }
+        
+        // Enhanced Navigation Effects
+        function initNavigationEffects() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    // Add ripple effect
+                    const ripple = document.createElement('span');
+                    ripple.style.cssText = `
+                        position: absolute;
+                        width: 20px;
+                        height: 20px;
+                        background: rgba(99, 102, 241, 0.6);
+                        border-radius: 50%;
+                        transform: scale(0);
+                        animation: ripple 0.6s linear;
+                        pointer-events: none;
+                    `;
+                    
+                    this.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+        }
+        
+        // Glow Effects for Interactive Elements
+        function initGlowEffects() {
+            // Add glow class to demo cards and buttons
+            const glowElements = document.querySelectorAll('.demo-card, .blog-card, .btn-primary');
+            glowElements.forEach(el => el.classList.add('glow-on-hover'));
+        }
+        
+        // Add CSS for ripple animation
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(rippleStyle);
     </script>
 </body>
 </html>

@@ -1,0 +1,40 @@
+{
+  "posts": [
+    {
+      "slug": "understanding-mcp",
+      "title": "Understanding MCP: The Protocol That Connects AI to Everything",
+      "readTime": 8,
+      "wordTarget": 2500,
+      "lang": "en",
+      "category": "Foundations",
+      "level": "Beginner"
+    },
+    {
+      "slug": "mcp-architecture",
+      "title": "MCP Architecture Deep Dive: How It Really Works",
+      "readTime": 12,
+      "wordTarget": 3000,
+      "lang": "en",
+      "category": "Technical",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "build-first-server",
+      "title": "Build Your First MCP Server: A Step-by-Step Tutorial",
+      "readTime": 15,
+      "wordTarget": 4000,
+      "lang": "en",
+      "category": "Tutorial",
+      "level": "Advanced"
+    },
+    {
+      "slug": "mcp-use-cases",
+      "title": "MCP Use Cases: From File Management to Real-Time Data",
+      "readTime": 10,
+      "wordTarget": 2000,
+      "lang": "en",
+      "category": "Applications",
+      "level": "All"
+    }
+  ]
+} 
